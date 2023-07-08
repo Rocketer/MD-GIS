@@ -1,0 +1,173 @@
+﻿
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MAP | Ship Setting</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="plugins/iCheck/all.css">
+    <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
+
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <style>
+
+        .text-white {
+            color: white;
+        }
+
+        @media (max-width: 767px) {
+            .main-header .logo {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+    <div class="wrapper">
+        <!-- Main Header -->
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="javascript:;" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>MD</b></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>MAP</b> Demo</span>
+            </a>
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top" role="navigation">
+
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu col-md-12">
+                    <ul class="nav navbar-nav col-md-6">
+                        <li class="dropdown user user-menu">
+                            <a href="WatchDog.html" class="dropdown-toggle btn-primary">
+                                Watchdog
+                            </a>
+                        </li>
+                        <li class="dropdown user user-menu">
+                            <a href="javascript:;" class="dropdown-toggle btn-info">
+                                Ship
+                            </a>
+                        </li>
+                        <li class="dropdown user user-menu">
+                            <a href="MQTT.html" class="dropdown-toggle btn-primary">
+                                Realtime Communication
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav col-md-6" style="text-align:right;">
+
+                        <li class="dropdown user user-menu pull-right">
+                            <!-- Menu Toggle Button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <!-- The user image in the navbar-->
+                                <img src="images/myHRLogo.png" class="user-image" alt="User Image">
+                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                                <span class="hidden-xs">myHR</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- The user image in the menu -->
+                                <li class="user-header" style="height:unset;">
+                                    <img src="images/myHRLogo.png" class="img-circle" alt="User Image">
+                                    <p>myHR</p>
+                                </li>
+                                <!-- Menu Body -->
+                                <li class="user-body">
+                                    <div class="row">
+                                        <div class="col-xs-12 text-center">
+                                            <a href="javascript:;">Administrator</a>
+                                        </div>
+                                    </div>
+                                    <!-- /.row -->
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <button type="button" class="btn btn-block btn-primary" onclick="location.href = 'Index.html';">View Map</button>
+
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+
+            <section class="content-header">
+                <h1>
+                    Ship Setting
+                    <small>Setup additional ship information to display on map and forthcoming managerial purpose in the future.</small>
+                </h1>
+
+            </section>
+
+            <!-- Main content -->
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- To the right -->
+            <div class="pull-right hidden-xs">
+                <img alt="myHR" title="myHR" height="30" style="margin-top: -5px;" src="images/myHRLogo.png">
+            </div>
+            <!-- Default to the left -->
+            <strong>Copyright &copy; 2019 myHR Corporation Limited.</strong> All rights reserved.
+        </footer>
+
+
+        <button type="button" id="btnModal" style="display:none;" data-toggle="modal" data-target="#modal-dialog"></button>
+        <div class="modal fade" id="modal-dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <!-----Store Message Here------->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery 3 -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Slimscroll -->
+    <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="bower_components/fastclick/lib/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
+    <!-- iCheck -->
+    <script src="plugins/iCheck/icheck.min.js"></script>
+    <!-- Page Script -->
+
+
+</body>
+</html>

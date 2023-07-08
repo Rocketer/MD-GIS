@@ -1,0 +1,55 @@
+﻿<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="info-box small-box">
+        <div class="col-md-12 col-sm-12 col-xs-12 bg-<!--shipTypeColor-->">
+            <span class="info-box-icon text-<!--shipTypeColor-->">                
+                <!--ShipPicture-->
+            </span>
+            <div class="info-box-content ">
+                <span class="info-box-number"><img src="Picture/Flag/<!--flag-->.png" height="15" onerror="this.src='Picture/Flag/unknown.png';" /> <!--vesselName--></span>
+                <span class="info-box-number" style="padding-top:25px;"><!--shipTypeName--> 
+                    <span style="font-size:12px; font-style:italic;"> updated : <!--Updated--></span>
+                </span>
+                
+            </div>
+        </div>
+
+        <div class="col-md-12 col-sm-12 col-xs-12 infoWindow">
+            <div class="col-lg-5 col-md-5 col-sm-5">
+                <div class="row">
+                    IMO : <b><!--imoNumber--></b>
+                </div>
+                <div class="row">
+                    MMSI : <b><!--mmsi--></b>
+                </div>
+                <div class="row">
+                    Call Sign : <b><!--callSign--></b>
+                </div>
+                <div class="row">
+                    Flag : <b><!--flag--></b>
+                </div>
+                <div class="row">
+                    Vessel Type : <b><!--shipTypeName--></b>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-7" style="border-left:1px solid #f4f4f4; padding-left:25px;">
+                <div class="row">
+                    Status : <b><!--navigationStatusName--></b>
+                </div>
+                <div class="row">
+                    Speed/ Course : <b><!--speedOverGround--> / <!--courseOverGround--></b>
+                </div>
+                <div class="row">
+                    Draught : <b><!--draught--></b>
+                </div>
+                <div class="row">
+                    Latitude : <b><!--latitude--></b>
+                </div>
+                <div class="row">
+                    Longitude : <b><!--longitude--></b>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-block btn-<!--shipTypeClassColor--> btn-xs" onclick="showShipInfo('<!--mmsi-->',true);">More Info <i class="fa fa-anchor"></i></button>
+
+    </div>
+</div>

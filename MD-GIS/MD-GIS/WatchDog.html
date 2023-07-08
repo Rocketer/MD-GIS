@@ -1,0 +1,1342 @@
+﻿
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MAP | Watchdog Setting</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="plugins/iCheck/all.css">
+    <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
+    <!-- Bootstrap time Picker -->
+    <link rel="stylesheet" href="plugins/timepicker/bootstrap-timepicker.min.css">
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">
+
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <style>
+
+        /*--------- Drawing Tool------------*/
+        #color-palette {
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .color-button {
+            width: 30px;
+            height: 30px;
+            font-size: 0;
+            margin: 2px;
+            float: left;
+            cursor: pointer;
+        }
+
+        #delete-button {
+            margin-left: 20px;
+            display: inline-block;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+
+        .text-white {
+            color: white;
+        }
+
+        @media (max-width: 767px) {
+            .main-header .logo {
+                display: none;
+            }
+        }
+
+        .mr-10 {
+            margin-right: 10px;
+        }
+
+        .mr-20 {
+            margin-right: 20px;
+        }
+
+        .nav-tabs-custom > .nav-tabs > li.active {
+            border-top-color: #dd4b39;
+        }
+
+        [contenteditable="true"] {
+            background-color: aliceblue;
+        }
+
+        #tab4 [contenteditable="true"] {
+            background-color:ghostwhite;
+        }
+
+        #tab4 button[data][helper] {
+        background-color: #00c0ef;
+            border-color: #00acd6;
+            border-radius: 3px;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            border: 1px solid transparent;
+            padding: 1px 5px;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #fff;
+            display: inline-block;
+            margin-bottom: 5px;
+            font-weight: 400;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            touch-action: manipulation;
+            cursor: pointer;
+            user-select: none;
+            background-image: none;
+        }
+
+        [name="lblSchedule"] {
+            margin-left: 10px;
+        }
+
+        #tbDaily td, #tbWeekly td, #tbAssign td, #tbProperty td {
+            font-size: 14px;
+            padding-left: 15px;
+            padding-bottom: 10px;
+        }
+
+        #tbDaily, #tbWeekly, #tbAssign {
+            min-width: 500px;
+        }
+
+        td[data-date], .datepicker-switch, th.dow, th.prev, th.next {
+            font-size: 13px;
+        }
+
+        div[data="flag"],
+        div[data="shipType"] {
+            display: table-row;
+        }
+
+        div[data="flag"] button,
+        div[data="shipType"] button {
+            margin-left: 5px;
+            margin-top: 5px;
+        }
+
+        div[data="flag"] .select2-container,
+        div[data="shipType"] .select2-container {
+            min-width: 240px;
+        }
+
+        div[data="flag"] .select2-container,
+        div[data="flag"] button,
+        div[data="shipType"] .select2-container,
+        div[data="shipType"] button {
+            display: table-cell;
+        }
+
+        .select2-container--default .select2-selection--single, .datepicker {
+            border-radius: unset;
+            -webkit-border-radius: unset;
+            border: 1px solid #d2d6de;
+        }
+
+
+        .select2-results__options {
+            min-width: max-content;
+            overflow-x: hidden;
+        }
+
+        .select2-container .select2-selection--single {
+            height: 34px;
+        }
+
+        .select2-dropdown--below {
+            width: max-content !important;
+        }
+
+        .btn-round {
+            border-radius: 50%;
+        }
+
+        .property-value input {
+            text-align: center;
+        }
+
+        .property-value label {
+            border: none;
+            text-align: center;
+            width: 3em;
+        }
+
+        .property-value button, .property-value label, .property-value input, .property-value select {
+            display: inline-block;
+        }
+
+        .property-value [data="integer-list"] input,
+        .property-value [data="float-list"] input,
+        .property-value [data="string-list"] input,
+        .property-value select {
+            width: calc(100% - 6em) !important;
+        }
+
+        .property-value .value-list {
+            width: calc(100% - 2em) !important;
+        }
+        .value-list {
+            display:flex;
+        }
+
+        .property-value [data="integer-between"] input,
+        .property-value [data="float-between"] input,
+        .property-value [data="string-between"] input,
+        .property-value [data="time-between"] input {
+            width: calc(50% - 2em);
+        }
+
+
+        .property-value .hide {
+            /*display:unset !important;*/
+        }
+
+        .pt5 {
+            padding-top: 5px;
+        }
+
+        .pt10 {
+            padding-top: 10px;
+        }
+
+        .pt15 {
+            padding-top: 15px;
+        }
+
+        .pt20 {
+            padding-top: 20px;
+        }
+
+        .pb5 {
+            padding-bottom: 5px;
+        }
+
+        .pb10 {
+            padding-bottom: 10px;
+        }
+
+        .pb15 {
+            padding-bottom: 15px;
+        }
+
+        .pb20 {
+            padding-bottom: 20px;
+        }
+
+        .table {
+            font-size:14px;
+        }
+    </style>
+</head>
+<body class="hold-transition skin-yellow sidebar-mini sidebar-collapse" onload="bindList();">
+    <div class="wrapper">
+        <!-- Main Header -->
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="javascript:;" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>MD</b></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>MAP</b> Demo</span>
+            </a>
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top" role="navigation">
+
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu col-md-12">
+                    <ul class="nav navbar-nav col-md-6">
+                        <li class="dropdown user user-menu">
+                            <a href="javascript:;" class="dropdown-toggle btn-danger">
+                                Watchdog
+                            </a>
+                        </li>
+                        <li class="dropdown user user-menu" style="display:none;">
+                            <a href="ShipSetting.html" class="dropdown-toggle btn-warning">
+                                Ship
+                            </a>
+                        </li>
+                        <li class="dropdown user user-menu">
+                            <a href="MQTT.html" class="dropdown-toggle btn-warning">
+                                Realtime Communication
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav col-md-6" style="text-align:right;">
+
+                        <li class="dropdown user user-menu pull-right">
+                            <!-- Menu Toggle Button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <!-- The user image in the navbar-->
+                                <img src="images/myHRLogo.png" class="user-image" alt="User Image">
+                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                                <span class="hidden-xs">myHR</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- The user image in the menu -->
+                                <li class="user-header" style="height:unset;">
+                                    <img src="images/myHRLogo.png" class="img-circle" alt="User Image">
+                                    <p>myHR</p>
+                                </li>
+                                <!-- Menu Body -->
+                                <li class="user-body">
+                                    <div class="row">
+                                        <div class="col-xs-12 text-center">
+                                            <a href="javascript:;">Administrator</a>
+                                        </div>
+                                    </div>
+                                    <!-- /.row -->
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <button type="button" class="btn btn-block btn-primary" onclick="location.href = 'Index.html';">View Map</button>
+
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+
+            <section class="content-header">
+                <h1 class="text-bold">
+                    Watchdog Configuration
+                    <small>Configuring naval condition filter entering restrictions zone and send notification to any channel you setup.</small>
+                </h1>
+
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-md-12">
+                        <div class="box" role="setting-list">
+                            <div class="box-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Watchdog</th>
+                                            <th>Description</th>
+                                            <th>Property Filter</th>
+                                            <th>Spatial Filter</th>
+                                            <th>Schedule</th>
+                                            <th>Active Period</th>
+                                            <th>Detected</th>
+                                            <th style="width: 40px">Remove</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--<tr style="cursor:pointer;">
+                                            <td>1.</td>
+                                            <td>เกาะสีชัง</td>
+                                            <td>-</td>
+                                            <td>Schedule</td>
+                                            <td>Area Restriction</td>
+                                            <td>
+                                                Everyday All Day
+                                                <div class="progress progress-xs">
+                                                    <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge bg-red">55%</span></td>
+                                        </tr>-->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <div class="box-tools">
+                                    <div class="col-md-6 pull-right">
+                                        <button type="button" class="btn btn-danger pull-right" onclick="clearWatchdogForm(); startEditWatchdog();">New</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box -->
+
+
+                        <div class="nav-tabs-custom" style="display:none;" role="setting-form">
+                            <ul class="nav nav-tabs pull-right" role="tab">
+                                <li tabindex="4"><a href="#tab4" data-toggle="tab">Notification Message</a></li>
+                                <li tabindex="3"><a href="#tab3" data-toggle="tab">Spatial Filter</a></li>
+                                <li tabindex="2"><a href="#tab2" data-toggle="tab">Property Filter</a></li>
+                                <li tabindex="1" class="active"><a href="#tab1" data-toggle="tab">Description / Watching Period</a></li>
+                                <li class="pull-left header text-bold">
+                                    <i class="fa fa-user-secret"></i>  <span id="editMode">Add new</span> watchdog  :
+                                    <label id="txtName" style="min-width:200px; padding-left:10px; padding-right:10px;" class="text-red" contenteditable="true"></label>
+                                </li>
+                            </ul>
+                            <div class="tab-content" style="padding-left:50px;">
+                                <div class="tab-pane active" id="tab1">
+
+                                    <div class="box-body" style="padding:10px;">
+                                        <h4 class="text-bold">Description / Note</h4>
+                                        <div class="col-md-12" style="min-height:50px; padding:10px;" contenteditable="true" id="txtDesc"></div>
+
+                                    </div>
+
+
+                                    <div class="box-body" style="padding:10px;">
+                                        <h4 class="text-bold">Schedule</h4>
+
+                                        <div class="col-md-12" style="padding-left:30px;">
+
+                                            <div class="row pb10">
+                                                <div class="col-md-2 text-bold">
+                                                    <input type="radio" value="allDay" class="flat-red" name="rdoSchedule">
+                                                    <span name="lblSchedule">Allday</span>
+                                                </div>
+                                                <div class="col-md-10">
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2 text-bold pt5">
+                                                    <input type="radio" value="daily" class="flat-red" name="rdoSchedule">
+                                                    <span name="lblSchedule">Daily</span>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <table id="tbDaily">
+                                                        <tbody>
+                                                            <!-----Generate List Of Schedule------>
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <td colspan="5">
+                                                                    <button type="button" class="btn btn-block btn-default" onclick="appendDaily();">
+                                                                        <i class="fa fa-plus"></i>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2 text-bold pt5">
+                                                    <input type="radio" value="weekly" class="flat-red" name="rdoSchedule">
+                                                    <span name="lblSchedule">Weekday</span>
+                                                </div>
+                                                <div class="col-md-10">
+
+                                                    <table id="tbWeekly">
+                                                        <tbody>
+                                                            <!-----Generate List Of Schedule------>
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <td colspan="6">
+                                                                    <button type="button" class="btn btn-block btn-default" onclick="appendWeekDay();">
+                                                                        <i class="fa fa-plus"></i>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="box-body" style="padding:10px;">
+                                        <h4 class="text-bold">Active Period</h4>
+                                        <div class="col-md-12" style="padding-left:30px;">
+
+                                            <div class="row pb10">
+                                                <div class="col-md-2 text-bold">
+                                                    <input type="radio" value="forever" class="flat-red" name="rdoDuration">
+                                                    <span name="lblSchedule">Forever</span>
+                                                </div>
+                                                <div class="col-md-10"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2 text-bold pt5">
+                                                    <input type="radio" value="assign" class="flat-red" name="rdoDuration">
+                                                    <span name="lblSchedule">Assign</span>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <table id="tbAssign">
+                                                        <tbody>
+                                                            <!-----Generate List Of ActivePeriod------>
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <td colspan="5">
+                                                                    <button type="button" class="btn btn-block btn-default" onclick="appendPeriod();">
+                                                                        <i class="fa fa-plus"></i>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="row margin-bottom">
+                                                <div class="col-md-2 text-bold">
+                                                    <input type="radio" value="inactive" class="flat-red" name="rdoDuration">
+                                                    <span name="lblSchedule">Inactive</span>
+                                                </div>
+                                                <div class="col-md-10"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab2">
+                                    <div class="box-header" style="padding-left:0px;">
+                                        <h4 class="text-bold">Property Filter</h4>
+                                    </div>
+                                    <div class="box-body" style="padding:10px;">
+                                        <div class="row">
+                                            <div class="col-md-9 col-sm-12" style="padding-left:0px;">
+                                                <table id="tbProperty" style="padding-left:0;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="btn-group">
+                                                                <button type="button" class="btn btn-danger" style="height:100%;" onclick="$(this).closest('tr').remove();">
+                                                                    <i class="fa fa-minus"></i>
+                                                                </button>
+                                                            </td>
+                                                            <td class="form-group" style="vertical-align:top;">
+                                                                <select class="form-control select2" data="property" style="width: 100%;">
+                                                                    <option>Altitude</option>
+                                                                    <option>CallSign</option>
+                                                                    <option>CourseOverGround</option>
+                                                                    <option>Destination</option>
+                                                                    <option>DimensionToBow</option>
+                                                                    <option>DimensionToPort</option>
+                                                                    <option>DimensionToStarboard</option>
+                                                                    <option>DimensionToStern</option>
+                                                                    <option>Draught</option>
+                                                                    <option>ETA</option>
+                                                                    <option>Flag</option>
+                                                                    <option>IMONumber</option>
+                                                                    <option>MMSI</option>
+                                                                    <option>NavigationStatus</option>
+                                                                    <option>Origin</option>
+                                                                    <option>RateOfTurn</option>
+                                                                    <option>RepeatIndicator</option>
+                                                                    <option>ShipType</option>
+                                                                    <option>SpeedOverGround</option>
+                                                                    <option>TrueHeading</option>
+                                                                    <option>VesselName</option>
+                                                                </select>
+                                                            </td>
+                                                            <td class="form-group" style="vertical-align:top;">
+
+                                                                <select class="form-control select2 hide" data="operator-string">
+                                                                    <option>Is</option>
+                                                                    <option>Is not</option>
+                                                                    <option>Like</option>
+                                                                    <option>Unlike</option>
+                                                                </select>
+
+                                                                <div class="hide">
+                                                                    <select class="form-control select2" data="operator-shipType">
+                                                                        <option>Is</option>
+                                                                        <option>Is not</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="hide">
+                                                                    <select class="form-control select2" data="operator-navigationStatus">
+                                                                        <option>Is</option>
+                                                                        <option>Is not</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="hide">
+                                                                    <select class="form-control select2" data="operator-flag">
+                                                                        <option>Is</option>
+                                                                        <option>Is not</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="hide">
+                                                                    <select class="form-control select2" data="operator-integer">
+                                                                        <option>Is</option>
+                                                                        <option>Is not</option>
+                                                                        <option>></option>
+                                                                        <option>>=</option>
+                                                                        <option><</option>
+                                                                        <option><=</option>
+                                                                        <option>Between</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="hide">
+                                                                    <select class="form-control select2" data="operator-float">
+                                                                        <option>Is</option>
+                                                                        <option>Is not</option>
+                                                                        <option>></option>
+                                                                        <option>>=</option>
+                                                                        <option><</option>
+                                                                        <option><=</option>
+                                                                        <option>Between</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="hide">
+                                                                    <select class="form-control select2" data="operator-time">
+                                                                        <option>></option>
+                                                                        <option>>=</option>
+                                                                        <option><</option>
+                                                                        <option><=</option>
+                                                                        <option>Between</option>
+                                                                    </select>
+                                                                </div>
+                                                            </td>
+
+
+                                                            <td class="form-group property-value">
+
+                                                                <!--<div data="integer-list">
+                                                                    <input type="text" class="form-control" />
+                                                                    <button type="button" class="btn btn-warning">
+                                                                        <i class="fa fa-plus"></i>
+                                                                    </button>
+                                                                    <button type="button" class="btn btn-danger">
+                                                                        <i class="fa fa-minus"></i>
+                                                                    </button>
+                                                                </div>
+
+                                                                <div data="float-list">
+                                                                    <input type="text" class="form-control" />
+                                                                    <button type="button" class="btn btn-warning">
+                                                                        <i class="fa fa-plus"></i>
+                                                                    </button>
+                                                                    <button type="button" class="btn btn-danger">
+                                                                        <i class="fa fa-minus"></i>
+                                                                    </button>
+                                                                </div>
+
+
+                                                                <div data="string-list">
+                                                                    <input type="text" class="form-control" />
+                                                                    <button type="button" class="btn btn-warning">
+                                                                        <i class="fa fa-plus"></i>
+                                                                    </button>
+                                                                    <button type="button" class="btn btn-danger">
+                                                                        <i class="fa fa-minus"></i>
+                                                                    </button>
+                                                                </div>
+
+                                                                <div data="integer-single">
+                                                                    <input type="text" class="form-control" />
+                                                                </div>
+
+                                                                <div data="float-single">
+                                                                    <input type="text" class="form-control" />
+                                                                </div>
+
+                                                                <div data="time-single">
+                                                                    <input type="text" class="form-control" />
+                                                                </div>
+
+
+                                                                <div data="integer-between">
+                                                                    <input type="text" class="form-control" data="start" />
+                                                                    <label class="form-control">and</label>
+                                                                    <input type="text" class="form-control" data="end" />
+                                                                </div>
+
+                                                                <div data="float-between">
+                                                                    <input type="text" class="form-control" data="start" />
+                                                                    <label class="form-control">and</label>
+                                                                    <input type="text" class="form-control" data="end" />
+                                                                </div>
+
+                                                                <div data="string-between">
+                                                                    <input type="text" class="form-control" data="start" />
+                                                                    <label class="form-control">and</label>
+                                                                    <input type="text" class="form-control" data="end" />
+                                                                </div>
+
+                                                                <div data="time-between">
+                                                                    <input type="text" class="form-control" data="start" />
+                                                                    <label class="form-control">and</label>
+                                                                    <input type="text" class="form-control" data="end" />
+                                                                </div>
+
+
+                                                                <div data="shipType">
+                                                                    <select class="form-control select2">
+                                                                        <option>Cargo</option>
+                                                                        <option>Tanker</option>
+                                                                        <option>Passenger</option>
+                                                                        <option>HighSpeed</option>
+                                                                        <option>TugAndSpecial</option>
+                                                                        <option>Fishing</option>
+                                                                        <option>Pleasure</option>
+                                                                        <option>Navigation</option>
+                                                                        <option>Unspecific</option>
+                                                                    </select>
+                                                                    <button type="button" class="btn btn-warning">
+                                                                        <i class="fa fa-plus"></i>
+                                                                    </button>
+                                                                    <button type="button" class="btn btn-danger">
+                                                                        <i class="fa fa-minus"></i>
+                                                                    </button>
+                                                                </div>
+
+                                                                <div data="navigationStatus">
+                                                                    <select class="form-control select2">
+                                                                        <option>Aground</option>
+                                                                        <option>AIS-SART is active</option>
+                                                                        <option>At anchor</option>
+                                                                        <option>Constrained by her draught</option>
+                                                                        <option>Engaged in Fishing</option>
+                                                                        <option>Moored</option>
+                                                                        <option>Not defined (default)</option>
+                                                                        <option>Not under command</option>
+                                                                        <option>Reserved for future amendment of Navigational Status for HSC</option>
+                                                                        <option>Reserved for future amendment of Navigational Status for WIG</option>
+                                                                        <option>Reserved for future use</option>
+                                                                        <option>Restricted manoeuverability</option>
+                                                                        <option>Under way sailing</option>
+                                                                        <option>Under way using engine</option>
+                                                                    </select>
+                                                                    <button type="button" class="btn btn-warning">
+                                                                        <i class="fa fa-plus"></i>
+                                                                    </button>
+                                                                    <button type="button" class="btn btn-danger">
+                                                                        <i class="fa fa-minus"></i>
+                                                                    </button>
+                                                                </div>
+
+                                                                <div data="flag">
+                                                                    <select class="form-control select2">
+                                                                        <option>AD - Andorra</option>
+                                                                        <option>AE - United Arab Emirates</option>
+                                                                        <option>AF - Afghanistan</option>
+                                                                        <option>AG - Antigua and Barbuda</option>
+                                                                        <option>AI - Anguilla</option>
+                                                                        <option>AL - Albania</option>
+                                                                        <option>AM - Armenia</option>
+                                                                        <option>AN - Netherlands Antilles</option>
+                                                                        <option>AO - Angola</option>
+                                                                        <option>AQ - Antarctica</option>
+                                                                        <option>AR - Argentina</option>
+                                                                        <option>AS - American Samoa</option>
+                                                                        <option>AT - Austria</option>
+                                                                        <option>AU - Australia</option>
+                                                                        <option>AW - Aruba</option>
+                                                                        <option>AX - Aland Islands</option>
+                                                                        <option>AZ - Azerbaijan</option>
+                                                                        <option>BA - Bosnia and Herzegovina</option>
+                                                                        <option>BB - Barbados</option>
+                                                                        <option>BD - Bangladesh</option>
+                                                                        <option>BE - Belgium</option>
+                                                                        <option>BF - Burkina Faso</option>
+                                                                        <option>BG - Bulgaria</option>
+                                                                        <option>BH - Bahrain</option>
+                                                                        <option>BI - Burundi</option>
+                                                                        <option>BJ - Benin</option>
+                                                                        <option>BL - Saint Barthelemy</option>
+                                                                        <option>BM - Bermuda</option>
+                                                                        <option>BN - Brunei Darussalam</option>
+                                                                        <option>BO - Bolivia</option>
+                                                                        <option>BQ - Bonaire, Saint Eustatius and Saba</option>
+                                                                        <option>BR - Brazil</option>
+                                                                        <option>BS - Bahamas</option>
+                                                                        <option>BT - Bhutan</option>
+                                                                        <option>BV - Bouvet Island</option>
+                                                                        <option>BW - Botswana</option>
+                                                                        <option>BY - Belarus</option>
+                                                                        <option>BZ - Belize</option>
+                                                                        <option>CA - Canada</option>
+                                                                        <option>CC - Cocos (Keeling) Islands</option>
+                                                                        <option>CD - Congo (DR)</option>
+                                                                        <option>CF - Central African Republic</option>
+                                                                        <option>CG - Congo</option>
+                                                                        <option>CH - Switzerland</option>
+                                                                        <option>CI - Cote d'Ivoire</option>
+                                                                        <option>CK - Cook Islands</option>
+                                                                        <option>CL - Chile</option>
+                                                                        <option>CM - Cameroon</option>
+                                                                        <option>CN - China</option>
+                                                                        <option>CO - Colombia</option>
+                                                                        <option>CR - Costa Rica</option>
+                                                                        <option>CS - Czechoslovakia</option>
+                                                                        <option>CU - Cuba</option>
+                                                                        <option>CV - Cabo Verde</option>
+                                                                        <option>CW - Curacao</option>
+                                                                        <option>CX - Christmas Island</option>
+                                                                        <option>CY - Cyprus</option>
+                                                                        <option>CZ - Czech Republic</option>
+                                                                        <option>DD - German Democratic Republic</option>
+                                                                        <option>DE - Germany</option>
+                                                                        <option>DJ - Djibouti</option>
+                                                                        <option>DK - Denmark</option>
+                                                                        <option>DM - Dominica</option>
+                                                                        <option>DO - Dominican Republic</option>
+                                                                        <option>DZ - Algeria</option>
+                                                                        <option>EC - Ecuador</option>
+                                                                        <option>EE - Estonia</option>
+                                                                        <option>EG - Egypt</option>
+                                                                        <option>EH - Western Sahara</option>
+                                                                        <option>ER - Eritrea</option>
+                                                                        <option>ES - Spain</option>
+                                                                        <option>ET - Ethiopia</option>
+                                                                        <option>FI - Finland</option>
+                                                                        <option>FJ - Fiji</option>
+                                                                        <option>FK - Falkland Islands</option>
+                                                                        <option>FM - Micronesia</option>
+                                                                        <option>FO - Faroe Islands</option>
+                                                                        <option>FR - France</option>
+                                                                        <option>GA - Gabon</option>
+                                                                        <option>GB - United Kingdom</option>
+                                                                        <option>GD - Grenada</option>
+                                                                        <option>GE - Georgia</option>
+                                                                        <option>GF - French Guiana</option>
+                                                                        <option>GG - Guernsey</option>
+                                                                        <option>GH - Ghana</option>
+                                                                        <option>GI - Gibraltar</option>
+                                                                        <option>GL - Greenland</option>
+                                                                        <option>GM - Gambia</option>
+                                                                        <option>GN - Guinea</option>
+                                                                        <option>GP - Guadeloupe</option>
+                                                                        <option>GQ - Equatorial Guinea</option>
+                                                                        <option>GR - Greece</option>
+                                                                        <option>GS - South Georgia and the South Sandwich Islands</option>
+                                                                        <option>GT - Guatemala</option>
+                                                                        <option>GU - Guam</option>
+                                                                        <option>GW - Guinea - Bissau</option>
+                                                                        <option>GY - Guyana</option>
+                                                                        <option>HK - Hong Kong</option>
+                                                                        <option>HM - Heard Island and McDonald Islands</option>
+                                                                        <option>HN - Honduras</option>
+                                                                        <option>HR - Croatia</option>
+                                                                        <option>HT - Haiti</option>
+                                                                        <option>HU - Hungary</option>
+                                                                        <option>ID - Indonesia</option>
+                                                                        <option>IE - Ireland</option>
+                                                                        <option>IL - Israel</option>
+                                                                        <option>IM - Isle of Man</option>
+                                                                        <option>IN - India</option>
+                                                                        <option>IO - British Indian Ocean Territory</option>
+                                                                        <option>IQ - Iraq</option>
+                                                                        <option>IR - Iran</option>
+                                                                        <option>IS - Iceland</option>
+                                                                        <option>IT - Italy</option>
+                                                                        <option>JE - Jersey</option>
+                                                                        <option>JM - Jamaica</option>
+                                                                        <option>JO - Jordan</option>
+                                                                        <option>JP - Japan</option>
+                                                                        <option>KE - Kenya</option>
+                                                                        <option>KG - Kyrgyzstan</option>
+                                                                        <option>KH - Cambodia</option>
+                                                                        <option>KI - Kiribati</option>
+                                                                        <option>KM - Comoros</option>
+                                                                        <option>KN - Saint Kitts and Nevis</option>
+                                                                        <option>KP - North Korea</option>
+                                                                        <option>KR - Korea</option>
+                                                                        <option>KW - Kuwait</option>
+                                                                        <option>KY - Cayman Islands</option>
+                                                                        <option>KZ - Kazakhstan</option>
+                                                                        <option>LA - Lao People's Democratic Republic</option>
+                                                                        <option>LB - Lebanon</option>
+                                                                        <option>LC - Saint Lucia</option>
+                                                                        <option>LI - Liechtenstein</option>
+                                                                        <option>LK - Sri Lanka</option>
+                                                                        <option>LR - Liberia</option>
+                                                                        <option>LS - Lesotho</option>
+                                                                        <option>LT - Lithuania</option>
+                                                                        <option>LU - Luxembourg</option>
+                                                                        <option>LV - Latvia</option>
+                                                                        <option>LY - Libya</option>
+                                                                        <option>MA - Morocco</option>
+                                                                        <option>MC - Monaco</option>
+                                                                        <option>MD - Moldova</option>
+                                                                        <option>ME - Montenegro</option>
+                                                                        <option>MF - Saint Martin (FR)</option>
+                                                                        <option>MG - Madagascar</option>
+                                                                        <option>MH - Marshall Islands</option>
+                                                                        <option>MK - Macedonia (FYROM)</option>
+                                                                        <option>ML - Mali</option>
+                                                                        <option>MM - Myanmar</option>
+                                                                        <option>MN - Mongolia</option>
+                                                                        <option>MO - Macao</option>
+                                                                        <option>MP - Northern Mariana Islands</option>
+                                                                        <option>MQ - Martinique</option>
+                                                                        <option>MR - Mauritania</option>
+                                                                        <option>MS - Montserrat</option>
+                                                                        <option>MT - Malta</option>
+                                                                        <option>MU - Mauritius</option>
+                                                                        <option>MV - Maldives</option>
+                                                                        <option>MW - Malawi</option>
+                                                                        <option>MX - Mexico</option>
+                                                                        <option>MY - Malaysia</option>
+                                                                        <option>MZ - Mozambique</option>
+                                                                        <option>NA - Namibia</option>
+                                                                        <option>NC - New Caledonia</option>
+                                                                        <option>NE - Niger</option>
+                                                                        <option>NF - Norfolk Island</option>
+                                                                        <option>NG - Nigeria</option>
+                                                                        <option>NI - Nicaragua</option>
+                                                                        <option>NL - Netherlands</option>
+                                                                        <option>NO - Norway</option>
+                                                                        <option>NP - Nepal</option>
+                                                                        <option>NR - Nauru</option>
+                                                                        <option>NU - Niue</option>
+                                                                        <option>NZ - New Zealand</option>
+                                                                        <option>OM - Oman</option>
+                                                                        <option>PA - Panama</option>
+                                                                        <option>PE - Peru</option>
+                                                                        <option>PF - French Polynesia</option>
+                                                                        <option>PG - Papua New Guinea</option>
+                                                                        <option>PH - Philippines</option>
+                                                                        <option>PK - Pakistan</option>
+                                                                        <option>PL - Poland</option>
+                                                                        <option>PM - Saint Pierre and Miquelon</option>
+                                                                        <option>PN - Pitcairn</option>
+                                                                        <option>PR - Puerto Rico</option>
+                                                                        <option>PS - Palestine</option>
+                                                                        <option>PT - Portugal</option>
+                                                                        <option>PW - Palau</option>
+                                                                        <option>PY - Paraguay</option>
+                                                                        <option>QA - Qatar</option>
+                                                                        <option>RE - Reunion</option>
+                                                                        <option>RO - Romania</option>
+                                                                        <option>RS - Serbia</option>
+                                                                        <option>RU - Russian Federation</option>
+                                                                        <option>RW - Rwanda</option>
+                                                                        <option>SA - Saudi Arabia</option>
+                                                                        <option>SB - Solomon Islands</option>
+                                                                        <option>SC - Seychelles</option>
+                                                                        <option>SD - Sudan</option>
+                                                                        <option>SE - Sweden</option>
+                                                                        <option>SG - Singapore</option>
+                                                                        <option>SH - Saint Helena, Ascension and Tristan da Cunha</option>
+                                                                        <option>SI - Slovenia</option>
+                                                                        <option>SJ - Svalbard and Jan Mayen</option>
+                                                                        <option>SK - Slovakia</option>
+                                                                        <option>SL - Sierra Leone</option>
+                                                                        <option>SM - San Marino</option>
+                                                                        <option>SN - Senegal</option>
+                                                                        <option>SO - Somalia</option>
+                                                                        <option>SR - Suriname</option>
+                                                                        <option>SS - South Sudan</option>
+                                                                        <option>ST - Sao Tome and Principe</option>
+                                                                        <option>SV - El Salvador</option>
+                                                                        <option>SX - Saint Maarten (NL)</option>
+                                                                        <option>SY - Syrian Arab Republic</option>
+                                                                        <option>SZ - Swaziland</option>
+                                                                        <option>TC - Turks and Caicos Islands</option>
+                                                                        <option>TD - Chad</option>
+                                                                        <option>TF - French Southern Territories</option>
+                                                                        <option>TG - Togo</option>
+                                                                        <option>TH - Thailand</option>
+                                                                        <option>TJ - Tajikistan</option>
+                                                                        <option>TK - Tokelau</option>
+                                                                        <option>TL - East Timor</option>
+                                                                        <option>TM - Turkmenistan</option>
+                                                                        <option>TN - Tunisia</option>
+                                                                        <option>TO - Tonga</option>
+                                                                        <option>TR - Turkey</option>
+                                                                        <option>TT - Trinidad and Tobago</option>
+                                                                        <option>TV - Tuvalu</option>
+                                                                        <option>TW - Taiwan (Province of China)</option>
+                                                                        <option>TZ - Tanzania</option>
+                                                                        <option>UA - Ukraine</option>
+                                                                        <option>UG - Uganda</option>
+                                                                        <option>UM - United States Minor Outlying Islands</option>
+                                                                        <option>US - United States of America</option>
+                                                                        <option>UY - Uruguay</option>
+                                                                        <option>UZ - Uzbekistan</option>
+                                                                        <option>VA - Holy See</option>
+                                                                        <option>VC - Saint Vincent and the Grenadines</option>
+                                                                        <option>VE - Venezuela</option>
+                                                                        <option>VG - Virgin Islands (GB)</option>
+                                                                        <option>VI - Virgin Islands (US)</option>
+                                                                        <option>VN - Viet Nam</option>
+                                                                        <option>VU - Vanuatu</option>
+                                                                        <option>WF - Wallis and Futuna</option>
+                                                                        <option>WS - Samoa</option>
+                                                                        <option>XA - Azores</option>
+                                                                        <option>XB - Madeira</option>
+                                                                        <option>XC - Alaska</option>
+                                                                        <option>XD - Adele Island</option>
+                                                                        <option>XE - Ascension Island</option>
+                                                                        <option>XF - Crozet Archipelago</option>
+                                                                        <option>XG - Kerguelen Islands</option>
+                                                                        <option>XH - Tahiti</option>
+                                                                        <option>XI - Saint Paul and Amsterdam Islands</option>
+                                                                        <option>YE - Yemen</option>
+                                                                        <option>YT - Mayotte</option>
+                                                                        <option>YU - Yugoslavia</option>
+                                                                        <option>ZA - South Africa</option>
+                                                                        <option>ZM - Zambia</option>
+                                                                        <option>ZW - Zimbabwe</option>
+                                                                        <option>ZZ - Unknown</option>
+                                                                    </select>
+                                                                    <button type="button" class="btn btn-warning">
+                                                                        <i class="fa fa-plus"></i>
+                                                                    </button>
+                                                                    <button type="button" class="btn btn-danger">
+                                                                        <i class="fa fa-minus"></i>
+                                                                    </button>
+                                                                </div>-->
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <button type="button" class="btn btn-block btn-warning" onclick="appendProperty();">
+                                                    <i class="fa fa-plus"></i> Filter
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab3">
+                                    <div class="box-header" style="padding:10px; padding-bottom:0px;">
+                                        <h4 class="text-bold pull-left">Config Spatial Filter</h4>
+                                        <div class="pull-right">
+                                            <div id="color-palette"></div>
+                                        </div>
+                                        <div class="pull-right">
+                                            <a id="delete-button" class="btn btn-default" onclick="deleteSelectedShape();"><i class="fa fa-remove"></i> Remove selected</a>
+                                        </div>
+                                    </div>
+                                    <div class="box-body">
+                                        <div id="Map" class="col-md-12 col-sm-12" style="padding:0px; background-color:red; "></div>
+                                        <div class="col-md-12 col-sm-12" style="padding:0px; margin-top:10px;">
+                                            <h4>
+                                                Raise event when ship is going to
+                                                <select data="spatialMethod" class="form-control" style=" font-weight:bold; width:auto; display:unset; margin-left:15px; margin-right:15px; text-align-last:center;">
+                                                    <option></option>
+                                                    <option>enter to</option>
+                                                    <option>exit from</option>
+                                                    <option>be within</option>
+                                                    <option>be outside</option>
+                                                </select> these area(s)
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane" id="tab4">
+                                    <div class="box-body" style="padding:10px;">
+                                        <div class="row" style="margin-bottom:10px;">
+                                            <h4 class="text-bold">When ship is detected. Call service url</h4>
+                                            <div class="col-md-12 pb10" role="messageHelper"></div>
+                                            <textarea style="width:100%; padding:5px; height:32px; color:darkviolet; background-color:ghostwhite; min-width:99%; max-width:99%; border:none;" data="url"></textarea>
+                                        </div>
+                                        <div class="row" style="margin-bottom:10px;">
+                                            <h4 class="text-bold">Content to post</h4>
+                                            <div class="col-md-12 pb10" role="messageHelper"></div>
+                                            <textarea style="width:100%; padding:5px; height:32px; color:saddlebrown; background-color:ghostwhite;  min-width:99%; max-width:99%; border:none; font-style:italic; font-size:16px;" data="postData"></textarea>
+                                        </div>
+                                        <div class="row" style="margin-bottom:10px;">
+                                            <h4 class="text-bold">
+                                                Content-Type
+                                                <label style="padding:10px; min-width:150px; font-weight:normal;  color:saddlebrown; font-style:italic;" contenteditable="true" data="contentType"
+                                                       autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></label>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div style="text-align:right;" class="box-footer footer-menu">
+                                    <div class="pull-left">
+                                        <button type="button" class="btn btn-primary" onclick="$(this).next().click();">Import</button>
+                                        <input type="file" id="importer" style="display:none;" />
+                                    </div>
+                                    <div class="pull-right">
+                                        <button type="button" class="btn btn-danger" onclick="bindList();">Cancel</button>
+                                        <button type="button" class="btn btn-info" onclick="exportSetting()">Export</button>
+                                        <button type="button" class="btn btn-success" onclick="saveSetting()">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+            </section>
+
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- To the right -->
+            <div class="pull-right hidden-xs">
+                <img alt="myHR" title="myHR" height="30" style="margin-top: -5px;" src="images/myHRLogo.png">
+            </div>
+            <!-- Default to the left -->
+            <strong>Copyright &copy; 2019 myHR Corporation Limited.</strong> All rights reserved.
+        </footer>
+
+
+        <button type="button" id="btnModal" style="display:none;" data-toggle="modal" data-target="#modal-dialog"></button>
+        <div class="modal fade" id="modal-dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <!-----Store Message Here------->
+                    </div>
+                    <div class="modal-footer" style="text-align: center;">
+                        <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+        <a href="data:application/octet-stream;charset=utf-16le;base64,//5mAG8AbwAgAGIAYQByAAoA" style="display:none;">Download File</a>
+
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery 3 -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
+    <script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- bootstrap datepicker -->
+    <script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <!-- bootstrap color picker -->
+    <script src="bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+    <!-- bootstrap time picker -->
+    <script src="plugins/timepicker/bootstrap-timepicker.min.js"></script>
+    <!-- Slimscroll -->
+    <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- Select2 -->
+    <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
+    <!-- FastClick -->
+    <script src="bower_components/fastclick/lib/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
+    <!-- iCheck -->
+    <script src="plugins/iCheck/icheck.min.js"></script>
+
+    <!-- Page Script -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=drawing&key=AIzaSyCmEE7AZVk54PDubSlzrvr68KRxqezPt6E" async defer></script>
+    <script src="js/map.js" defer></script>
+    <script src="js/zone.js" defer></script>
+    <script src="js/watchdog.js" defer></script>
+    <script src="js/scheduleAndPeriod.js" defer></script>
+    <script src="js/propertyFilter.js" defer></script>
+    <script src="js/lib.js" defer></script>
+    <script src="js/jquery.ns-autogrow.min.js"></script>
+    <script src="js/txtClientControl.js"></script>
+    <script src="js/WatchdogMap.js"></script>
+
+    <!--MQTT JS-->
+    <script src="js/paho-1.0.3/paho-mqtt-min.js"></script>
+    <script src="js/realtime.js"></script>
+    <script>
+    function MqttConnected() {
+        MQTT.subscribe( MQTT_WATCHDOG_TOPIC );
+        MQTT.subscribe( MQTT_DETECT_TOPIC );
+    }
+
+    function updateWatchdogRealtime(data) {
+        bindList();
+    }
+
+    function updateDetectionRealtime(data) {
+
+        $.getJSON("API.ashx?Mode=GetListWatchDog", function (tmp) {
+            for (var i = 0; i < tmp.Result.length; i++) {
+                var row = tmp.Result[i];
+                if (row.W_ID == data.W_ID) {
+                    $('tr[W_ID="' + data.W_ID + '"] .detection').html(row.Detected);
+                    return;
+                }                    
+            }
+        });
+    }
+    </script>
+
+
+    <script>
+
+
+        // Page Start
+        $(function () {
+
+            // Checkbox Style
+            initCheckbox();
+
+            //Date picker
+            initDatePicker('.datepicker');
+
+            //Timepicker
+            initTimePicker('.timepicker');
+
+            // Setting Importer
+
+            $('#importer').change(function (event) {
+                var reader = new FileReader();
+                reader.onload = function (event) {
+                    try {
+                        var result = event.target.result;
+                        $('#importer').val('');
+                        var obj = JSON.parse(result); // ได้ JSON Object
+                    } catch (e) {
+                        alert(e);
+                        return;
+                    }
+                    applySetting(obj);
+                };
+                reader.readAsText(event.target.files[0]);
+            });
+        });
+
+        function initDatePicker(selector) {
+            $(selector).datepicker({
+                //autoclose: true,
+                format: "dd M yyyy"
+            });
+        }
+
+        function initCheckbox() {
+            //iCheck for checkbox and radio inputs
+            $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+                checkboxClass: 'icheckbox_minimal-blue',
+                radioClass: 'iradio_minimal-blue'
+            })
+            //Red color scheme for iCheck
+            $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+                checkboxClass: 'icheckbox_minimal-red',
+                radioClass: 'iradio_minimal-red'
+            })
+            //Flat red color scheme for iCheck
+            $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+                checkboxClass: 'icheckbox_flat-green',
+                radioClass: 'iradio_flat-green'
+            })
+        }
+
+        function initTimePicker(selector) {
+            $(selector).timepicker({
+                showInputs: false
+            });
+        }
+
+    </script>
+
+
+
+    <script>
+
+        function applySetting(json) {
+            // Check json format
+            if (!json.hasOwnProperty('W_ID') |
+                !json.hasOwnProperty('W_Name') |
+                !json.hasOwnProperty('W_Desc') |
+                !json.hasOwnProperty('Schedule_Type') |
+                !json.hasOwnProperty('Period_Type') |
+                !json.hasOwnProperty('Schedule_Daily') |
+                !json.hasOwnProperty('Schedule_Weekday') |
+                !json.hasOwnProperty('Active_Periods') |
+                !json.hasOwnProperty('Property_Filters') |
+                !json.hasOwnProperty('Zones') |
+                !json.hasOwnProperty('Spatial_Filter_Type') |
+                !json.hasOwnProperty('Service_URL') |
+                !json.hasOwnProperty('Post_Content') |
+                !json.hasOwnProperty('Content_Type')) {
+
+                alertDialog('Invalid Watchdog setting format', 'danger');
+                return;
+            }
+
+            clearWatchdogForm();
+
+            // Try to set all data
+
+            $('#txtName').html(json.W_Name);
+            $('#txtDesc').html(json.W_Desc);
+
+            setSchedule(json);
+            setPeriod(json);
+            setPropertyFilters(json);
+
+            setSpatialData(json, map);
+            setNotice(json);
+        }
+
+        function saveSetting() {
+            var json = generateJson();
+            $.post("API.ashx?Mode=SaveWatchdog", json, function (result) {
+                var Result = JSON.parse(result);
+
+                if (Result.Status)
+                    alertDialog(Result.Message, 'success');
+                else
+                    alertDialog(Result.Message, 'warning');
+
+                bindList();
+            });
+        }
+
+        function exportSetting() {
+            var json = generateJson();
+            var W_Name = $('#txtName').html();
+            if (W_Name == "") W_Name = "Watchdog";
+            //W_Name += Math.floor(Date.now() / 1000).toString() + '.json';
+            W_Name += '.json';
+            downloadTextFile(json, W_Name);
+        }
+
+        function generateJson() {
+            // ------------------ generate Obj to save---------------------
+            var watchDog = {
+                W_ID: $('#editMode').attr('W_ID'),
+                W_Name: $('#txtName').html(),
+                W_Desc: $('#txtDesc').html(),
+                Schedule_Type: getScheduleType(),
+                Period_Type: getPeriodType(),
+                Schedule_Daily: getDaily(),
+                Schedule_Weekday: getWeekDays(),
+                Active_Periods: getActivePeriods(),
+                Property_Filters: getPropertyFilters(),
+                Zones: getZones(),
+                Spatial_Filter_Type: $('[data="spatialMethod"]').prop('selectedIndex'),
+                Service_URL: $('[data="url"]').val(),
+                Post_Content: $('[data="postData"]').val(),
+                Content_Type: $('[data="contentType"]').html()
+            };
+            return JSON.stringify(watchDog);
+        }
+
+        function alertDialog(txt, mode) {
+            $('#modal-dialog').removeClass('modal-warning')
+                .removeClass('modal-success')
+                .removeClass('modal-danger')
+                .removeClass('modal-info')
+                .removeClass('modal-primary')
+                .addClass('modal-' + mode).find('.modal-body').html(txt);
+            $('#btnModal').click();
+        }
+
+    </script>
+
+</body>
+</html>

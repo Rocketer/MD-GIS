@@ -1,0 +1,1640 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MAP | DEMO</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+    <link rel="icon" href="images/wifi.ico" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="plugins/iCheck/all.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+          page. However, you can choose any other skin. Make sure you
+          apply the skin class to the body tag so the changes take effect. -->
+    <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <!--Ship Type-->
+    <style type="text/css">
+        .cb div {
+            margin-right:10px;
+        }
+
+        .Cargo {
+        }
+
+        .Tanker {
+        }
+
+        .Passenger {
+        }
+
+        .HighSpeed {
+        }
+
+        .TugAndSpecial {
+        }
+
+        .Fishing {
+        }
+
+        .Pleasure {
+        }
+
+        .Navigation {
+        }
+
+        .Unspecific {
+        }
+    </style>
+
+    <style type="text/css">
+        /*-------- Custom CSS------------*/
+        .info-box {
+            margin-bottom:0;
+        }
+
+        .info-box-content {
+            margin-bottom:0;
+            padding-bottom:0;
+        }
+
+        .small-box .icon {
+            top: -20px;
+        }
+
+        .nav-tabs-custom {
+            margin-bottom: unset;
+            background: #fff;
+        }
+
+            .nav-tabs-custom > .tab-content {
+                border-bottom-right-radius: unset;
+                border-bottom-left-radius: unset;
+            }
+
+        .tab-pane .list-group li {
+            min-height: 40px;
+            padding-bottom: 5px;
+        }
+
+        .progress-description {
+            font-size: 12px;
+        }
+
+        .sidebar-menu li div.cb {
+            padding-top: 10px;
+            padding-bottom: 0px;
+            padding-left: 15px;
+        }
+
+        .control-sidebar-bg, .control-sidebar {
+            width:400px;
+            right:-400px;
+        }
+
+        #MapMini {
+            height:250px;
+        }
+
+        .list-group li b, .list-group li a, li.list-group-item  {
+            min-height:25px;
+            font-size:12px;
+            padding-left:5px;
+            padding-right:5px;
+            padding-top:3px;
+
+        }
+
+        .list-group li b, .list-group li a {
+        width:45%;
+        }
+
+        .list-group{
+            margin-bottom:0px;
+            min-width:350px;
+        }
+
+        .info-box-content {
+            text-align:left;
+            padding-left:10px;
+        }
+
+        .small-box:hover {
+            color:unset;
+        }
+
+        aside span.info-box-icon {
+
+        }
+
+        .content-wrapper {
+        width:100%;
+        height:100%;
+        }
+
+        .nav>li>a {
+                padding: 10px 10px;
+            }
+
+        .main-footer {
+            /*position:relative;
+            bottom:0px;*/
+        }
+
+        body {
+            height:100%;
+            overflow-y:hidden;
+        }
+
+        #Map {
+            position:absolute; 
+            top:50px; 
+            bottom:0px; 
+            width:100%;
+        }
+
+        #leftPanel {
+            width:470px; 
+            position:absolute; 
+            top:50px; bottom:30px; left:0px;             
+        }
+
+        #leftPanel div::-webkit-scrollbar {
+          width: 3px;
+          height:3px;
+        }
+
+        #leftPanel div::-webkit-scrollbar-track {
+           background-color:beige; 
+        }
+
+        #leftPanel div::-webkit-scrollbar-thumb  {
+           background-color:#3c8dbc; 
+        }
+
+
+        .table-ship tbody tr td {
+             font-size:11px;
+             padding : unset !important;
+             vertical-align : unset;
+             cursor : pointer;
+        }
+
+        .table-ship tbody tr:hover {
+            background-color:#f4f4f4;
+        }
+
+        .table-ship th {
+            text-align:center;
+        }
+
+        .table-ship .btn {
+            font-size:11px;
+            width:100%;
+            height:100%;
+            margin:0;
+        }
+
+        .navbar-nav li.dropdown,.navbar-nav li.right-info {
+            margin-top:5px;
+        }
+
+        #lstDontEnter, #lstDontExit {
+            color:white;
+        }
+
+        .zoneItem {
+            padding-left:20px;
+            padding-top:5px;
+            padding-bottom:5px;
+        }
+
+        .user-body {
+         padding:10px !important;
+        }
+        .user-menu {
+        margin-right:10px;
+        }
+
+        #totalEnterZone, #totalExitZone {
+         padding-left:5px;
+         padding-right:5px;
+         background-color:white;
+         font-weight:bold;
+         color:red;
+         border-radius:50%;
+        }
+
+        #alertEnterZone ul li {
+            cursor:pointer;
+        }
+
+        .info-box-number {
+        font-size:20px;
+        }
+
+        .infoWindow {
+            background-color:#f5f5f5;
+        }
+        .infoWindow .row{
+            padding-top:5px;
+            padding-bottom:5px;
+            
+        }
+        .info-value {
+            font-weight:bold;
+            text-align:right;
+            color:#404863;
+            font-size:16px;
+        }
+
+        .ship-label {
+            margin-top:-20px;
+        }
+
+        .text-white {
+            color:white;
+        }
+
+        @media (max-width: 767px) {
+            .main-header .logo{
+                display:none;
+            }      
+            /*Override AdminLTE*/
+            .small-box {
+                text-align:left;
+            }  
+        }
+
+        .updated_report {
+            bottom:4px;
+            position:absolute;
+            left:4px;
+            width:auto;
+            background-color:cornsilk;
+            padding-left:5px;
+            padding-right:15px;
+            font-size:12px;
+            color:#333;
+            border-radius:4px;
+            opacity:9;
+
+        }
+        
+    </style>
+    <style type="text/css" id="GoogleMapInfoWindow">
+
+.gm-style-iw {
+    max-width:500px;
+}
+#iw-container {
+        background-color:#f5f5f5;
+}
+#iw-container .iw-title {
+
+}
+#iw-container .iw-content {
+
+}
+.iw-content img {
+
+}
+.iw-subTitle {
+
+}
+.iw-bottom-gradient {
+	
+}
+
+</style>
+</head>
+<!--
+BODY TAG OPTIONS:
+=================
+Apply one or more of the following classes to get the
+desired effect
+|---------------------------------------------------------|
+| SKINS         | skin-blue                               |
+|               | skin-black                              |
+|               | skin-purple                             |
+|               | skin-yellow                             |
+|               | skin-red                                |
+|               | skin-green                              |
+|---------------------------------------------------------|
+|LAYOUT OPTIONS | fixed                                   |
+|               | layout-boxed                            |
+|               | layout-top-nav                          |
+|               | sidebar-collapse                        |
+|               | sidebar-mini                            |
+|---------------------------------------------------------|
+-->
+<body class="hold-transition skin-blue fixed sidebar-mini" onload="startPage();">
+    <div class="wrapper">
+        <!-- Main Header -->
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="javascript:;" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>MD</b></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>MAP</b> Demo</span>
+            </a>
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+
+                    <ul class="nav navbar-nav">
+
+                        <li class="dropdown user user-menu bg-red" id="alertEnterZone" style="display:none;">
+
+                            <!-- Menu Toggle Button -->
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="images/warning.gif" /> <span class="hidden-xs">Enter Restricted Zone</span>
+                                <span id="totalEnterZone"></span>
+                            </a>
+                            <ul class="dropdown-menu" id="listEnterZone">
+                                <!--
+                                    <li class="user-body">
+                                                <div class="user-block">
+                                                    <span style="width:40px; height:40px; font-size:40px; float:left; background-color:red;" id="hdr_img"><i class="fa fa-ship"></i></span>
+                                                    <span class="username">
+                                                        <a href="javascript:;">Sarah Ross</a>
+                                                        <a href="javascript:;" class="pull-right btn-box-tool"><i class="fa fa-search"></i></a>
+                                                    </span>
+                                                    <span class="description">Sent you a message - 3 days ago</span>
+                                                </div>
+
+                                    </li>
+                                -->
+                            </ul>
+                        </li>
+                        <li class="dropdown user user-menu " style="padding-top:5px; display:none;">
+                            <button type="button" class="btn btn-block btn-sm btn-warning" onclick="alertDialog('Demo Version','warning');">
+                                <i class="fa fa-toggle-right" style="margin-right:5px;"></i>
+                                Replay Focused Area
+                            </button>
+                        </li>
+                        <li>
+
+                        </li>
+
+                        <!-- /.messages-menu -->
+                        <li class="dropdown user user-menu">
+                            <!-- Menu Toggle Button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <!-- The user image in the navbar-->
+                                <img src="images/myHRLogo.png" class="user-image" alt="User Image">
+                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                                <span class="hidden-xs">myHR</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- The user image in the menu -->
+                                <li class="user-header" style="height:unset;">
+                                    <img src="images/myHRLogo.png" class="img-circle" alt="User Image">
+                                    <p>myHR</p>
+                                </li>
+                                <!-- Menu Body -->
+                                <li class="user-body">
+                                    <div class="row">
+                                        <div class="col-xs-12 text-center">
+                                            <a href="javascript:;">Administrator</a>
+                                        </div>
+                                    </div>
+                                    <!-- /.row -->
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+
+                                    <button type="button" class="btn btn-block btn-warning" onclick="location.href = 'Watchdog.html';">Watchdog Settings</button>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Control Sidebar Toggle Button -->
+                        <li class="right-info">
+                            <a href="#" data-toggle="control-sidebar"><i class="fa fa-info-circle"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar Menu -->
+                <ul class="sidebar-menu" data-widget="tree">
+                    <li class="treeview">
+                        <a href="javascript:;">
+                            <input type="checkbox" class="flat-green" id="chkToggleName"> <span style="margin-left:10px;">DISPLAY SHIP NAME</span>
+
+                        </a>
+                    </li>
+                    <li class="treeview">
+                        <a href="javascript:;">
+                            <input type="checkbox" class="flat-blue" id="chkToggleDirection"> <span style="margin-left:10px;">DISPLAY SHIP DIRECTION</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="treeview">
+                                <div class="cb text-aqua" style="padding-left:30px;">
+                                    <input type="radio" class="flat-blue" id="rdoByDistance" name="rdoDirection">
+                                    DIRECTION TO DISTANCE
+                                </div>
+                                <div class="cb text-aqua" style="padding-left:60px;">
+                                    <select id="selByDistance" class="form-control" style="width:100px; text-align-last:center;" onchange="setTimeout(toggleShipDirection, 100);">
+                                        <option value="0.1">100 m</option>
+                                        <option value="0.2">200 m</option>
+                                        <option value="0.5" selected>500 m</option>
+                                        <option value="1">1 km</option>
+                                        <option value="2">2 km</option>
+                                        <option value="5">5 km</option>
+                                        <option value="10">10 km</option>
+                                    </select>
+                                </div>
+                                <div class="cb text-aqua" style="padding-left:30px;">
+                                    <input type="radio" class="flat-blue" id="rdoByTime" name="rdoDirection" checked="checked">
+                                    DIRECTION TO NEXT
+                                </div>
+                                <div class="cb text-aqua" style="padding-left:60px;">
+                                    <select id="selByTime" class="form-control sm" style="width:100px; text-align-last:center;" onchange="setTimeout(toggleShipDirection, 100);">
+                                        <option value="5" selected>5 min</option>
+                                        <option value="10">10 min</option>
+                                        <option value="20">20 min</option>
+                                        <option value="30">30 min</option>
+                                        <option value="60">1 hr</option>
+                                        <option value="120">2 hr</option>
+                                        <option value="150">5 hr</option>
+                                    </select>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="javascript:;">
+                            <i class="fa fa-ship"></i> <span>DISPLAY SHIP TYPE</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <div class="cb Cargo text-green">
+                                    <input type="checkbox" class="flat-green" id="chkCargo" checked="checked" ship-type="Cargo">
+                                    Cargo Vessel
+                                </div>
+                            </li>
+                            <li>
+                                <div class="cb Tanker text-red">
+                                    <input type="checkbox" class="flat-red" id="chkTanker" checked="checked" ship-type="Tanker">
+                                    Tankers
+                                </div>
+                            </li>
+                            <li>
+                                <div class="cb Passenger text-blue">
+                                    <input type="checkbox" class="flat-blue" id="chkPassenger" checked="checked" ship-type="Passenger">
+                                    Passenger Vessel
+                                </div>
+                            </li>
+                            <li>
+                                <div class="cb HighSpeed text-yellow">
+                                    <input type="checkbox" class="flat-yellow" id="chkHighSpeed" checked="checked" ship-type="HighSpeed">
+                                    High Speed Craft
+                                </div>
+                            </li>
+                            <li>
+                                <div class="cb TugAndSpecial text-aqua">
+                                    <input type="checkbox" class="flat-aero" id="chkTugAndSpecial" checked="checked" ship-type="TugAndSpecial">
+                                    Tug And Special
+                                </div>
+                            </li>
+                            <li>
+                                <div class="cb Fishing text-orange">
+                                    <input type="checkbox" class="flat-orange" id="chkFishing" checked="checked" ship-type="Fishing">
+                                    Fishing Boat
+                                </div>
+                            </li>
+                            <li>
+                                <div class="cb Pleasure text-maroon">
+                                    <input type="checkbox" class="flat-pink" id="chkPleasure" checked="checked" ship-type="Pleasure">
+                                    Pleasure Craft
+                                </div>
+                            </li>
+                            <li>
+                                <div class="cb Navigation text-orange">
+                                    <input type="checkbox" class="flat-orange" id="chkNavigation" checked="checked" ship-type="Navigation">
+                                    Navigation Aids
+                                </div>
+                            </li>
+                            <li>
+                                <div class="cb Unspecific text-gray">
+                                    <input type="checkbox" class="flat-grey" id="chkUnspecific" checked="checked" ship-type="Unspecific">
+                                    Unspecify Ship
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-object-group"></i> <span>RESTRICTED ZONES</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="treeview">
+                                <a href="javascript:;" style="padding-left:20px; display:none;">
+                                    <input type="checkbox" class="flat-red" checked="checked" data-control="zones" zone-type="1" id="chkZoneType1" />
+                                    <span style="padding-left:10px;">Restricted Zones</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <!--<ul class="treeview-menu" id="lstDontEnter">
+
+        </ul>-->
+                            </li>
+                            <span id="listZone">
+                            <li>
+                                <div class="cb text-red">
+                                    <input type="checkbox" class="flat-red" W_ID="1" checked="checked">
+                                    <img src="images/Watchdog-Working.gif" alt="Working" title="Working" height="20" />
+                                    Zone 1
+                                </div>
+                            </li>
+                            </span>
+                            <li class="treeview" style="display:none;">
+                                <a href="javascript:;" style="padding-left:20px;">
+                                    <input type="checkbox" class="flat-red zoneItem" data-control="zones" zone-type="2" id="chkZoneType2" />
+                                    <span style="padding-left:10px;">เขตห้ามออก</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu" id="lstDontExit"></ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <!-- /.sidebar-menu -->
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- Content Wrapper. Contains page content -->
+
+
+        <div class="content-wrapper" style="position:relative;">
+            <div id="Map"></div>
+
+            <div id="leftPanel">
+                <!-- Box Comment -->
+                <div class="box box-widget collapsed-box" style="max-height:99%; overflow:auto;">
+                    <div class="box-header with-border">
+                        <div class="user-block">
+
+                            <i style="font-size:24px;" class="fa fa-th text-blue"></i>
+                            <span style="font-size:16px; font-weight:bold; color:gray; padding-left:10px;">All ship in this boundary</span>
+                            <code>Found  <span id="totalShip"></span>  </code>
+                        </div>
+                        <!-- /.user-block -->
+                        <div class="box-tools">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                        <!-- /.box-tools -->
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <input type="text" id="txtSearch" class="form-control input-sm" style="width:100%;" placeholder="Search MMSI, IMO, Vessel Name" onkeyup="reportShipList();">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="checkbox" class="minimal-red" id="chkRestricedZone"> &nbsp;
+                                <span style="position: relative; top: 3px;">Only Watchdog detected</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-body" style="border-top: 1px solid #f4f4f4; text-align:center;">
+                        <table class="table table-ship">
+                            <thead>
+                                <tr>
+                                    <th style="width: 20px"></th>
+                                    <th style="width: 20px"></th>
+                                    <th>Vessel Name</th>
+                                    <th>NAV</th>
+                                    <th>ETA</th>
+                                    <th>ACK</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableShipList"></tbody>
+                        </table>
+
+                    </div>
+
+
+                </div>
+                <!-- /.box -->
+
+            </div>
+            <div class="updated_report"></div>
+            <!-------Info Window Mini-------->
+        </div>
+
+        <!-- /.content-wrapper -->
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- To the right -->
+            <div class="pull-right hidden-xs">
+                <img alt="myHR" title="myHR" height="30" style="margin-top: -5px;" src="images/myHRLogo.png">
+            </div>
+            <!-- Default to the left -->
+            <strong>Copyright &copy; 2019 myHR Corporation Limited.</strong> <span>All rights reserved.</span>
+
+            <div style="position:absolute; right:30px; bottom:10px; margin-right:20px; display:none;" id="controlPos">
+                SouthEast : <input type="text" id="boundSW" style="width:300px; margin-right:20px;" />
+                NorthWest : <input type="text" id="boundNE" style="width:300px;" />
+                <input type="button" id="btn" style="visibility:hidden;" />
+            </div>
+
+
+        </footer>
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-light">
+
+            <div class="info-box small-box bg-blue" id="hdr_color">
+                <span class="info-box-icon" id="hdr_img">
+                    <i class="fa fa-ship"></i>
+                </span>
+                <div class="info-box-content">
+                    <span class="info-box-number text-black"><img src="Picture/Flag/unknown.png" height="15" id="hdr_Flag" onerror="this.src='Picture/Flag/unknown.png';" /> <span id="hdr_vesselName"><!--vesselName--></span></span>
+                    <span class="info-box-text text-bold text-primary">MMSI : <span id="hdr_mmsi"><!--mmsi--></span></span>
+                    <span class="info-box-text text-blue text-bold">IMO : <span id="hdr_imoNumber"><!--imoNumber--></span></span>
+
+
+                    <span class="progress-description">
+                        <span class="pull-left text-bold text-black" id="hdr_shipTypeName"><!--shipTypeName--></span>
+                    </span>
+                    <div class="icon">
+                        <i class="fa fa-anchor"></i>
+                    </div>
+                </div>
+                <div class="text-center text-sm col-lg-12 text-right text-green bg-black" style="padding:5px;" id="hdr_updated"><!--updated--></div>
+            </div>
+
+            <!-- Create the tabs -->
+            <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+                <li class="active">
+                    <a href="#control-sidebar-home-tab" data-toggle="tab">
+                        <i class="fa fa-safari margin-r-5"></i>
+                        Navigation
+                    </a>
+                </li>
+                <li>
+                    <a href="#control-sidebar-physical-tab" data-toggle="tab">
+                        <i class="fa fa-ship margin-r-5"></i>
+                        Physical
+                    </a>
+                </li>
+                <li>
+                    <a href="#control-sidebar-settings-tab" data-toggle="tab" id="aToggleInfo">
+                        <i class="fa fa-binoculars margin-r-5"></i>
+                        Route Trace
+                    </a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <!-- Navigation tab -->
+                <div class="tab-pane active" id="control-sidebar-home-tab">
+                    <div class="box">
+                        <!-- /.box-header -->
+                        <table class="table table-striped text-black">
+                            <tbody>
+                                <tr><td>Status</td><td id="nfo_navigationStatus" class="info-value"><!--navigationStatus--></td></tr>
+                                <tr><td>Call Sign</td><td id="nfo_callSign" class="info-value"><!--callSign--></td></tr>
+                                <tr><td>Position</td><td id="nfo_position" class="info-value"><!--position--></td></tr>
+                                <tr><td>Speed Over Ground</td><td id="nfo_speedOverGround1" class="info-value"><!--speedOverGround--></td></tr>
+                                <tr><td>Course Over Ground</td><td id="nfo_courseOverGround1" class="info-value"><!--courseOverGround--></td></tr>
+                                <tr><td>Repeat Indicator</td><td id="nfo_repeatIndicator" class="info-value"><!--repeatIndicator--></td></tr>
+                                <tr><td>Rate Of Turn</td><td id="nfo_rateOfTurn" class="info-value"><!--rateOfTurn--></td></tr>
+                                <tr><td>Origin</td><td id="nfo_origin" class="info-value"><!--origin--></td></tr>
+                                <tr><td>Destination</td><td id="nfo_destination" class="info-value"><!--destination--></td></tr>
+                                <tr><td>ETA</td><td id="nfo_ETA" class="info-value"><!--ETA--></td></tr>
+                            </tbody>
+                        </table>
+                        <!-- /.box-body -->
+                    </div>
+
+                    <!-- /.control-sidebar-menu -->
+                </div>
+                <!-- Physical tab -->
+                <div class="tab-pane" id="control-sidebar-physical-tab">
+                    <div class="box">
+                        <!-- /.box-header -->
+                        <table class="table table-striped text-black">
+                            <tbody>
+                                <tr><td>Latitude</td><td id="nfo_latitude" class="info-value"><!--latitude--></td></tr>
+                                <tr><td>Logitude</td><td id="nfo_longitude" class="info-value"><!--longitude--></td></tr>
+                                <tr><td>Speed Over Ground</td><td id="nfo_speedOverGround2" class="info-value"><!--speedOverGround--></td></tr>
+                                <tr><td>Course Over Ground</td><td id="nfo_courseOverGround2" class="info-value"><!--courseOverGround--></td></tr>
+                                <tr><td>Dimension To Bow</td><td id="nfo_dimensionToBow" class="info-value"><!--dimensionToBow--></td></tr>
+                                <tr><td>Dimension To Stern</td><td id="nfo_dimensionToStern" class="info-value"><!--dimensionToStern--></td></tr>
+                                <tr><td>Dimension To Port</td><td id="nfo_dimensionToPort" class="info-value"><!--dimensionToPort--></td></tr>
+                                <tr><td>Dimension To Starboard</td><td id="nfo_dimensionToStarboard" class="info-value"><!--dimensionToStarboard--></td></tr>
+                                <tr><td>Draught</td><td id="nfo_draught" class="info-value"><!--draught--></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Settings tab content -->
+                <div class="tab-pane" id="control-sidebar-settings-tab">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12" id="MapMini">
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="box">
+                                <div class="box-header">
+                                    <h3 class="box-title text-bold" style="font-size:14px;">Route History</h3>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body" style="padding:0">
+                                    <table id="tbHistory" class="table table-bordered table-hover" style="font-size:14px;">
+                                        <thead>
+                                            <tr>
+                                                <th>Time</th>
+                                                <th>Coordination</th>
+                                                <th>Nav. Status</th>
+                                                <th>Dist</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!--<tr>
+                                                <td>Trident</td>
+                                                <td>
+                                                    Internet
+                                                    Explorer 4.0
+                                                </td>
+                                                <td>Win 95+</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Trident</td>
+                                                <td>
+                                                    Internet
+                                                    Explorer 5.0
+                                                </td>
+                                                <td>Win 95+</td>
+                                            </tr>-->
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                            <!-- /.box -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+
+                </div>
+                <!-- /.tab-pane -->
+            </div>
+        </aside>
+        <!-- /.control-sidebar -->
+        <!-- Add the sidebar's background. This div must be placed
+        immediately after the control sidebar -->
+        <div class="control-sidebar-bg"></div>
+
+
+
+    </div>
+    <!-- ./wrapper -->
+
+    <button type="button" id="btnModal" style="display:none;" data-toggle="modal" data-target="#modal-dialog"></button>
+    <div class="modal fade" id="modal-dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <!-----Store Message Here------->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    <!-- REQUIRED JS SCRIPTS -->
+    <!-- jQuery 3 -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Slimscroll -->
+    <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- DataTables -->
+    <script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <!-- iCheck 1.0.1 -->
+    <script src="plugins/iCheck/icheck.min.js"></script>
+    <!-- FastClick -->
+    <script src="bower_components/fastclick/lib/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
+    <!--Custom JS-->
+    <script src="js/jquery.cookie.min.js"></script>
+    <!--DateFormat-->
+    <script src="js/date.format.js"></script>
+    <!--MQTT JS-->
+    <script src="js/paho-1.0.3/paho-mqtt-min.js"></script>
+
+    <script src="js/checkbox.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/zone.js"></script>
+    <script src="js/ship.js"></script>
+    <script src="js/history.js"></script>
+    <script src="js/lib.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            if ($.cookie('isSideBarExpand') == 'true')
+                $('body').removeClass('sidebar-collapse');
+            else
+                $('body').addClass('sidebar-collapse');
+
+            $('.sidebar-toggle').click(function () {
+                $.cookie('isSideBarExpand', $('body').hasClass('sidebar-collapse'));
+            });
+        });
+    </script>
+
+    <script>
+        var map;
+
+        function initMap() {
+
+            map = new google.maps.Map(document.getElementById('Map'), {
+                styles: mapStyle,
+                center: { lat: 13.58, lng: 100.6 },
+                streetViewControl: false,
+                zoom: 11,
+                mapTypeId: google.maps.MapTypeId.TERRAIN,
+                mapTypeControl: false,
+                mapTypeControlOptions: {
+                    position: google.maps.ControlPosition.BOTTOM_LEFT
+                },
+                zoomControl: false,
+                zoomControlOptions: {
+                    position: google.maps.ControlPosition.LEFT_CENTER
+                }
+            });
+            
+            google.maps.event.addListener(map, "click", function () {
+                closeShipInfoWindow();
+
+                // Hide Right Sidebar
+                if ($('#hdr_color').parent().hasClass("control-sidebar-open")) {
+                    $('nav .right-info [data-toggle="control-sidebar"]').click();
+                }
+                //data-toggle="control-sidebar"
+            });
+            google.maps.event.addListener(map, 'bounds_changed', boundChanged);
+
+        }
+
+        function boundChanged() {
+            var bounds = map.getBounds();
+            var southWest = bounds.getSouthWest();
+            var northEast = bounds.getNorthEast();
+            $('#controlPos #boundSW').val(southWest);
+            $('#controlPos #boundNE').val(northEast);
+        }
+
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmEE7AZVk54PDubSlzrvr68KRxqezPt6E" async defer></script>
+
+    <script id="realtime" src="js/realtime.js"></script>
+    <script>
+        function MqttConnected() {
+            MQTT.subscribe(MQTT_SHIP_TOPIC);
+            MQTT.subscribe(MQTT_WATCHDOG_TOPIC);
+            MQTT.subscribe(MQTT_DETECT_TOPIC);
+        }
+
+        function updateWatchdogRealtime(data) {
+            listZone();
+        }
+
+        function updateDetectionRealtime(data) {
+            getAllDetected();
+        }
+    </script>
+
+    <script>
+
+        // เก็บฝูงเรือทั้งหมดบน Map
+        var ships = new Ships();
+
+        function removeObsoleteShips() {
+            //return;
+
+            $.getJSON("ShipInfo.aspx?Mode=GetNmeaObjectList", function (objs) {
+                // ลบเรือที่ยังค้าง
+
+                var tmp = [];
+                for (var i = 0; i < objs.length; i++) {
+                    tmp.push(objs[i].MMSI);
+                }
+
+                for (var MMSI in ships.list) {
+                    if (tmp.indexOf(MMSI) == -1)
+                        ships.removeByMMSI(MMSI);
+                }
+
+                //Update List
+                reportShipList();
+            });
+        }
+
+        function updateShips(onFinished) { // Update เรือทุกลำ ทีละลำ
+
+            $.getJSON("ShipInfo.aspx?Mode=GetNmeaObjectList", function (objs) {
+                // เพิ่มเรือที่ไม่มีอยู่ในระบบ
+                $.each(objs, function (key, data) {
+                    updateShip(data, false);
+                });
+
+                //Update List
+                reportShipList();
+            });
+
+            if (onFinished != null)
+                setTimeout(onFinished, 100);
+        }
+
+        function updateShip(data, updateList) { // Update เรือลำเดียว
+
+            var latLng = new google.maps.LatLng(data.Latitude, data.Longitude);
+
+            if (!data.ShipTypeName) data.ShipTypeName = 'Unspecific';
+            // Get Default Visibility on Map by Checkbox
+            var visible = getTypeVisibility(data.ShipTypeName);
+            var target = map;
+            if (!visible) target = null;
+
+            var ship = ships.byMMSI(data.MMSI);
+            var marker;
+
+            if (ship) {/*----------- Update Existing Ship-----------*/
+
+                marker = ship.marker;
+                marker.setPosition(latLng);
+
+                // Update Lastest Data
+                ship.Id = data.Id;
+                ship.IMONumber = data.IMONumber.trim();
+                ship.ShipTypeName = data.ShipTypeName.trim();
+                ship.VesselName = data.VesselName.trim();
+
+            } else {
+                /*-----------Creating a new ship-------------*/
+                marker = new google.maps.Marker({
+                    position: latLng,
+                    map: target
+                });
+
+                ship = new Ship(data.Id, data.MMSI, data.IMONumber, data.ShipTypeName, data.VesselName, marker);
+                marker.addListener('click', function () {
+                    openInfoWindowMini(ship, map);
+                });
+
+                marker.addListener('dblclick', function () {
+                    showShipInfo(ship.MMSI, true);
+                });
+
+                ship.marker = marker; // Keep Reference Marker
+                ships.add(ship);
+            }
+                         
+
+            // Update Extra
+            ship.updateExtra(data);
+
+            // Set Tooltip
+            setShipTooltip(ship);
+
+            // Direction Line
+            showShipDirection(ship, map);
+
+            // Ship Label
+            showShipLabel(ship);
+
+            // Ship Icon
+            setShipIcon(ship);
+
+            // Update Report
+            reportUpdated(ship);
+
+
+            //-------------- Check Access Control Zone Here-------------
+            if (updateList) reportShipList();
+
+            // Update InfoWindow
+            if (shipInfoWindow && shipInfoWindow.ship.MMSI == ship.MMSI) {
+                openInfoWindowMini(ship, map);
+                // เปิด More Info อยู่
+                if ($('.control-sidebar').hasClass('control-sidebar-open'))
+                    showShipInfo(ship.MMSI);
+            }  
+
+        }
+
+        function showShipDirection(ship, map) {
+
+            hideShipDirection(ship);
+            if (ship.CourseOverGround == null) return;
+
+            if ($("#chkToggleDirection").parent().hasClass("checked")) {
+
+                var value = 0;
+                var km = 0;
+                var latLng = new google.maps.LatLng(ship.Latitude, ship.Longitude);
+
+                if ($("#rdoByDistance").parent().hasClass("checked")) {
+                    value = $("#selByDistance").val();
+                    km = value;
+                }
+                else {
+                    value = $("#selByTime").val();
+                    km = knot2Km(ship.SpeedOverGround * value) / 60;
+                }
+
+                var destPoint = getPointByRadianDistance(ship.Latitude, ship.Longitude, eval(ship.CourseOverGround), km);
+                var path = [latLng, destPoint];
+
+                var _d_Lat = destPoint.lat();
+                var _d_Lon = destPoint.lng();
+
+                directionLine = new google.maps.Polyline({
+                    path: path,
+                    geodesic: true,
+                    strokeColor: ship.ShipTypeColor,
+                    strokeOpacity: 1.0,
+                    strokeWeight: 2
+                });
+
+                // Display Direction Line
+                directionLine.setMap(map);
+                ship.directionLine = directionLine;
+            }
+        }
+
+        function hideShipDirection(ship) {
+            if (ship.directionLine) {
+                ship.directionLine.setMap(null);
+                ship.directionLine = null;
+            }
+        }
+
+        var updatedHandler = null;
+        function reportUpdated(ship) {
+
+            if (updatedHandler) clearTimeout(updatedHandler);
+
+            var content = '<a href="javascript:;" onclick="focusShip(' + ship.MMSI + ', map);"><img src="' + getShipIcon(ship.ShipTypeName, ship.TrueHeading, ship.isMoving()) + '"> ';
+            content += getShipUpdateInfo(ship);
+
+            $('.updated_report').html(content).show();
+            updatedHandler = setTimeout(function () { $('.updated_report').fadeOut(1000); }, 5000); //
+        }
+
+        function getShipUpdateInfo(ship) {
+            var content = '';
+            if (ship.VesselName != '') {
+                content += ship.VesselName;
+                if (ship.ShipTypeName != 'Unspecific')
+                    content += ' (' + ship.ShipTypeName + ') ';
+            } else
+                if (ship.ShipTypeName != 'Unspecific')
+                    content += ship.ShipTypeName + ' ';
+
+            if (ship.MMSI != '')
+                content += ' &nbsp; | &nbsp; MMSI  : ' + ship.MMSI + ' ';
+
+            if (ship.isMoving()) {
+                content += ' &nbsp; | &nbsp; ' + ship.SpeedOverGround + ' knot';
+                if (parseFloat(ship.SpeedOverGround) > 1) content += 's. ';
+            }
+
+            if (ship.Destination) {
+                content += ' &nbsp; | &nbsp; Headting to ' + ship.Destination;
+            }
+            content += ' ';
+
+            if (ship.DataDate & ship.DataTime) {
+                var updated = reportNMEATime(ship.DataDate, ship.DataTime, SHORT_TIME_FORMAT);
+                if (!stringLike(updated, 'Invalid') & !stringLike(updated.toString(), 'NaN'))
+                    content += ' &nbsp; | &nbsp; Updated : ' + updated + '\n';
+            }
+
+            return content;
+        }
+
+        function toggleShipDirection() {
+            if ($("#chkToggleDirection").parent().hasClass("checked")) {
+                for (var MMSI in ships.list) {
+                    showShipDirection(ships.list[MMSI], map);
+                }
+            } else {
+                for (var MMSI in ships.list) {
+                    hideShipDirection(ships.list[MMSI]);
+                }
+            }
+        }
+
+        function showShipLabel(ship) {
+            var label = { color: ship.ShipTypeColor, fontWeight: 'bold', fontSize: '10px', cssClass: "ship-label" };
+            if ($("#chkToggleName").parent().hasClass("checked")) { // Show name
+                if (ship.VesselName)
+                    label.text = ship.VesselName;
+                else if (ship.MMSI)
+                    label.text = ship.MMSI;
+                else if (ship.IMONumber)
+                    label.text = ship.IMONumber
+                else
+                    label.text = ship.ShipTypeName;
+            }
+            var marker = ship.marker;
+            if (label.text != '' & label.text != null) {
+                marker.setLabel(label);
+                setTimeout(function () {
+                    updateLabelPosition(label.text);
+                }, 50);
+            }
+            else
+                marker.setLabel(null);
+        }
+
+        function hideShipLabel(ship) {
+            ship.marker.setLabel(null);
+        }
+
+        function toggleShipLabel() {
+            if ($("#chkToggleName").parent().hasClass("checked")) { // Show name
+                for (var MMSI in ships.list) {
+                    showShipLabel(ships.list[MMSI]);
+                }
+            } else {
+                for (var MMSI in ships.list) {
+                    hideShipLabel(ships.list[MMSI]);
+                }
+            }
+        }
+
+        function updateLabelPosition(label) {
+            $('div:contains("' + label + '")[style*="font-family: Roboto, Arial, sans-serif;"]').css('margin-top', '-20px');
+        }
+
+        function setShipIcon(ship) {
+            var icon = {
+                url: getShipIcon(ship.ShipTypeName, ship.TrueHeading, ship.isMoving()),
+                size: new google.maps.Size(30, 30),
+                scaledSize: new google.maps.Size(30, 30), // scaled size
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(15, 15), // ขนาดของ icon หาร 2 จะตรงกับปลายหมุด
+                optimized: false
+            };
+            ship.marker.setIcon(icon);
+        }
+
+        function setShipTooltip(ship) {
+            var content = getShipTooltip(ship);
+            ship.marker.setTitle(content);
+        }
+
+        function getShipTooltip(ship) {
+            var content = '';
+            if (ship.VesselName != '') {
+                content += ship.VesselName;
+                if (ship.ShipTypeName != 'Unspecific')
+                    content += ' (' + ship.ShipTypeName + ')\n';
+            } else
+                if (ship.ShipTypeName != 'Unspecific')
+                    content += ship.ShipTypeName + '\n';
+
+            if (ship.MMSI != '')
+                content += 'MMSI  : ' + ship.MMSI + '\n';
+
+            if (ship.IMONumber != '')
+                content += 'IMO  : ' + ship.IMONumber + '\n';
+
+            if (ship.isMoving()) {
+                content += ship.SpeedOverGround + ' knot';
+                if (parseFloat(ship.SpeedOverGround) > 1) content += 's. ';
+            }
+
+            if (ship.Destination) {
+                content += 'Headting to ' + ship.Destination;
+            }
+            content += '\n';
+
+            if (ship.DataDate & ship.DataTime) {
+                var updated = reportNMEATime(ship.DataDate, ship.DataTime, SHORT_TIME_FORMAT,false);
+                if (!stringLike(updated, 'Invalid') & !stringLike(updated.toString(), 'NaN'))
+                    content += 'Updated : ' + updated + '\n';
+            }
+
+            return content;
+        }
+
+
+
+        function startPage() {
+
+
+            // Implement Checkbox UI
+            iCheckboxPlugin();
+
+            // Initial Google API
+            initMap();
+            initMapMini();
+            
+            // Acquire Ship To Rendering
+            updateShips(startRealtime);
+
+            // All watchdog zone
+            listZone();
+
+            // Watchdog detected
+            getAllDetected();
+
+            // แก้ box-widget บัง Map เวลาย่อ
+            $("#leftPanel").mouseover(function () {
+                if ($('.box-widget').hasClass('collapsed-box')) {
+                    $("#leftPanel").height(50);
+                } else {
+                    $("#leftPanel").css('height', '');
+                }
+            });
+
+            $('.updated_report').hide();
+
+            // ลบ เรือที่หาายไปจากระบบทุก 1 นาที
+            setInterval(function () {
+                removeObsoleteShips();
+            }, 30000);
+
+        }
+
+        //"Cargo","Tanker","Passenger","HighSpeed","TugAndSpecial","Fishing","Pleasure","Navigation""Unspecific"
+
+        function getTypeVisibility(ShipTypeName) {
+            return $('#chk' + ShipTypeName).parent().hasClass('checked');
+        }
+
+    </script>
+
+    <script id="reportShipListFunction">
+
+    function reportShipList() {
+
+        var shipList = ships.byVisibility(true); // List ของเรือที่จะ Report
+
+        var html = "";
+
+        var totalShips = 0;
+        var keyword = $("#txtSearch").val();
+        var onlyRestZone = $("#chkRestricedZone").parent().hasClass("checked")
+
+        for (i = 0; i < shipList.length - 1; i++) {
+            var ship = shipList[i];
+                
+            // ------------ Check Search & Filter -----------------
+            var matched = false;
+            if (keyword != "") {
+                // Check Keyword
+                if (!matched & stringLike(ship.MMSI, keyword)) {
+                    matched = true;
+                }
+                if (!matched & stringLike(ship.IMONumber, keyword)) {
+                    matched = true;
+                }
+                if (!matched & stringLike(ship.VesselName, keyword)) {
+                    matched = true;
+                }
+            } else {
+                matched = true;
+            }
+
+            
+
+            // Restricted Zone 
+            var detected = detectedMMSI(ship.MMSI);
+            if ( matched & $('#chkRestricedZone').prop('checked') & !detected) 
+                matched = false;
+                        
+
+            //--------------- Report Only Matched Ship ------------
+            if (matched) {
+                var iconURL = getShipIcon(ship.ShipTypeName, ship.TrueHeading, ship.isMoving());
+                html += "<tr onclick=\"focusShip('" + ship.MMSI + "',map)\">\n";
+
+                var shipFlag = "unknown.png";
+                if (ship.Flag) shipFlag = ship.Flag + '.png';
+                html += "    <td><img src='Picture/Flag/" + shipFlag + "' onerror=\"this.src='Picture/Flag/unknown.png';\" /></td>\n";
+
+
+                html += "    <td><img src='" + iconURL + "' title='" + ship.ShipTypeName + "'/></td>\n";
+                if (ship.VesselName) {
+                    html += "    <td>" + ship.VesselName + "</td>\n";
+                } else {
+                    html += "    <td>-</td>\n";
+                }
+                if (ship.NavigationStatusName) {
+                    html += "    <td>" + ship.NavigationStatusName + "</td>\n";
+                } else {
+                    html += "    <td>-</td>\n";
+                }
+                if (ship.ETA & ship.ETA != 'undefined') {
+                    html += "    <td>" + ship.ETA + "</td>\n";
+                } else {
+                    html += "    <td>-</td>\n";
+                }
+
+                if (detected) {
+                    html += "    <td><button type='button' class='btn bg-red btn-flat margin'>WAIT</button></td>\n";
+                }
+                else
+                    html += "    <td></td>";
+
+                html += "</tr>\n";
+                totalShips += 1;
+            }
+        }
+
+        $("#tableShipList").html(html);
+
+        if (totalShips == 0) {
+            $("#totalShip").html("nothing");
+        }
+        else if (totalShips == 1) {
+            $("#totalShip").html(totalShips + " vessel");
+        }
+        else {
+            $("#totalShip").html(totalShips + " vessels");
+        }
+    }
+
+   
+    </script>
+
+
+
+    <script type="text/javascript" id="Watchdog">
+
+    var watchdogs = [];
+
+    function listZone() {
+        $('#listZone').empty();
+
+        $.getJSON("API.ashx?Mode=GetWatchDogs", function (objs) {
+
+            $.each(objs.Result, function (key, data) {
+
+                var index = getWatchdogIndex(data.W_ID);
+                generateZones(data);
+
+                if (index == -1) {
+                    // Add new watchdog
+                    var html = '<li IsWorking="' + data.IsWorking + '">\n';
+                    html += innerWatchdogItem(data);                   
+                    html += '</li>\n';
+                    $('#listZone').append(html);
+                    
+                    watchdogs.push(data);
+                    
+                    setTimeout(function () {
+                        $('#listZone input[type="checkbox"]').iCheck({
+                            checkboxClass: 'icheckbox_flat-red'
+                        });
+                        $('#listZone ins').click(function () {
+                            //var W_ID = $(this).prev().attr("W_ID");
+                            applyDisplayZone();
+                        });
+                    }, 200);  
+
+                } else {
+                    // update watchdog
+                    var li = $('input[type="checkbox"][W_ID="' + data.W_ID + '"]').closest('li');
+                    li.attr('IsWorking', data.IsWorking).html(innerWatchdogItem(data));
+                    watchdogs[index].zones = data.zones;
+                }
+            });  
+            applyDisplayZone();
+        });
+        
+    }
+
+    function getWatchdogIndex(W_ID) {
+        for (var i = 0; i < watchdogs.length; i++) 
+            if (watchdogs[i].W_ID == W_ID)
+                return i;        
+        return -1
+    }
+
+    function innerWatchdogItem(data) {
+        var html = '<div class="cb text-red">\n';
+        html += '   <input type="checkbox" class="flat-red" W_ID="' + data.W_ID + '"';
+        if(data.IsWorking)
+            html += ' checked="checked"  />\n <img src="images/Watchdog-Working.gif" alt="Working" title="Working" height="20" />\n';
+        else
+            html += '  /> <img src="images/Watchdog-Sleeping.gif" alt="Sleep" title="Sleep" height="20" />\n';
+        html += '<a href="javascript:zoomToWatchdogZone(\'' + data.W_ID + '\');">' + data.W_Name + '</a>\n';
+        html += '</div>\n';
+        return html;
+    }
+
+    function generateZones(watchdog) {
+        watchdog.zones = [];
+        var zones = new Zones(watchdog.W_Name);
+
+        for (var i = 0; i < watchdog.Zones.length; i++) {
+            var data = watchdog.Zones[i];
+            var shape;
+            switch (data.Shape_Type) {
+                case 1: // Polygon
+                    shape = data2Polygon(data);
+                    break;
+                case 2: // Rectangle
+                    shape = data2Rectangle(data);
+                    break;
+                case 3: // Circle 
+                    shape = data2Circle(data);
+                    break;
+            }
+            shape.setDraggable(false);
+            shape.setEditable(false);
+            shape.clickable = false;
+
+            zone = new Zone(shape, shape.type);
+            zones.add(zone);
+        }        
+        watchdog.zones = zones;
+        delete watchdog.Zones;
+    }
+
+    function getSelectedWatchdog() {
+        var ret = [];
+        $('#listZone input[W_ID]:checked').each(function () {
+            var W_ID = $(this).attr('W_ID');
+            var index = getWatchdogIndex(W_ID);
+            if (index != -1)
+                ret.push(watchdogs[index]);
+        });
+        return ret;
+    }
+
+    var dspZones = []; // Keep Zone
+    function applyDisplayZone() {
+        // Hide All Zone
+        for (var i = dspZones.length-1; i >=0 ; i-- ){
+            dspZones[i].shape.setMap(null);
+        }
+        dspZones = [];
+        // Show Selected Zone
+        var selected = getSelectedWatchdog();
+        for (var w = 0; w < selected.length; w++) {
+            for (var z = 0; z < selected[w].zones.length(); z++) {
+                var zone = selected[w].zones.list[z];
+                zone.shape.setMap(map);
+                dspZones.push(zone);
+            }
+        }
+    }
+
+    function zoomToWatchdogZone(W_ID) {
+        var index = getWatchdogIndex(W_ID);
+        if (index == -1) return;
+        var watchdog = watchdogs[index];
+        var bound;
+        for (var i = 0; i < watchdog.zones.length(); i++ ) {
+            var zone = watchdog.zones.list[i];
+           if (!bound)
+                bound = getShapeBound(zone.shape);
+            else
+                bound.extend(getShapeBound(zone.shape));
+        }
+        if (!bound) return;
+        map.fitBounds(bound);
+    }
+
+
+    var detectedShips = [];
+    function getAllDetected() {
+
+        detectedShips = [];
+        $.getJSON("API.ashx?Mode=GetShipDetectedNow", function (data) {
+
+            var result = data.Result;
+
+            $.each(result, function (key, row) {
+                var obj = detectedMMSI(row.MMSI);
+                if (detectedMMSI(row.MMSI)) {
+                    obj = data; // Update Property
+                }                 
+                else {
+                    detectedShips.push(row); // Add new object
+                }
+            });
+
+            ////-------- Report Restricted Zone -------------
+            if (detectedShips.length == 0) {
+                $("#listEnterZone").html('');
+                $("#alertEnterZone").hide();
+            }
+            else {
+
+                html = "";
+                for (i = 0; i < detectedShips.length; i++) {
+                    var ship = detectedShips[i];
+
+                    var tmp = '';
+                    if (ship.MMSI != "") {
+                        tmp += "MMSI : " + ship.MMSI;
+                    } else if (ship.IMONumber != "") {
+                        tmp += "IMO : " + ship.IMONumber;
+                    }
+
+                    html += '<li class="user-body" onclick="focusShip(\'' + ship.MMSI + '\',map);">\n';
+                    html += '			<div class="user-block">';
+                    html += '				<span style="width:40px; height:40px; font-size:40px; float:left; background-color:red;"><i class="fa fa-ship"></i></span>';
+                    html += '				<span class="username">';
+                    html += '					<a href="javascript:;">' + ship.VesselName + '</a>';
+                    html += '					<a href="javascript:;" class="pull-right btn-box-tool"><i class="fa fa-search"></i></a>';
+                    html += '				</span>';
+                    html += '				<span class="description">' + tmp + '</span>';
+                    html += '			</div>';
+                    html += '</li> ';
+                }
+
+                    $("#totalEnterZone").html(detectedShips.length);
+                    $("#listEnterZone").html(html);
+                    $("#alertEnterZone").show();
+            }
+        });
+                     
+    }
+
+    function detectedMMSI(MMSI) { // Return Object in detectedShips
+        for (var i = 0; i < detectedShips.length; i++) {
+            if (detectedShips[i].MMSI == MMSI) return detectedShips[i];
+        }
+        return null;
+    }
+
+    </script>
+
+</body>
+</html >

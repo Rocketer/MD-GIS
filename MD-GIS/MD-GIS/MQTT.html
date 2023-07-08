@@ -1,0 +1,433 @@
+﻿
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MAP | Realtime Communication</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="plugins/iCheck/all.css">
+    <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
+
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <style>
+
+        .text-white {
+            color: white;
+        }
+
+        @media (max-width: 767px) {
+            .main-header .logo {
+                display: none;
+            }
+        }
+
+        .direct-chat-messages {
+            height:unset;
+        }
+
+        .direct-chat-text{
+            background-color:lightyellow;
+            margin:unset;
+            border-color:antiquewhite;
+        }
+
+        .sample {
+            font-style:italic;
+            font-weight:bold;
+            color:silver;
+            display:block;
+        }
+
+    </style>
+</head>
+<body class="hold-transition skin-green sidebar-mini sidebar-collapse" onload="startPage();">
+    <div class="wrapper">
+        <!-- Main Header -->
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="javascript:;" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>MD</b></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>MAP</b> Demo</span>
+            </a>
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top" role="navigation">
+
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu col-md-12">
+                    <ul class="nav navbar-nav col-md-6">
+                        <li class="dropdown user user-menu">
+                            <a href="WatchDog.html" class="dropdown-toggle btn-success">
+                                Watchdog
+                            </a>
+                        </li>
+                        <li class="dropdown user user-menu" style="display:none;">
+                            <a href="ShipSetting.html" class="dropdown-toggle btn-success">
+                                Ship
+                            </a>
+                        </li>
+                        <li class="dropdown user user-menu">
+                            <a href="javascript:;" class="dropdown-toggle btn-default text-green">
+                                Realtime Communication V1
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav col-md-6" style="text-align:right;">
+
+                        <li class="dropdown user user-menu pull-right">
+                            <!-- Menu Toggle Button -->
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <!-- The user image in the navbar-->
+                                <img src="images/myHRLogo.png" class="user-image" alt="User Image">
+                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                                <span class="hidden-xs">myHR</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- The user image in the menu -->
+                                <li class="user-header" style="height:unset;">
+                                    <img src="images/myHRLogo.png" class="img-circle" alt="User Image">
+                                    <p>myHR</p>
+                                </li>
+                                <!-- Menu Body -->
+                                <li class="user-body">
+                                    <div class="row">
+                                        <div class="col-xs-12 text-center">
+                                            <a href="javascript:;">Administrator</a>
+                                        </div>
+                                    </div>
+                                    <!-- /.row -->
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <button type="button" class="btn btn-block btn-primary" onclick="location.href = 'Index.html';">View Map</button>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+
+            <section class="content-header">
+                <h1>
+                    Realtime Communication V1
+                    <small>Trace all update log from realtime Broker.</small>
+                </h1>
+
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="box box-success">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Connection without TLS/SSL</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                                              
+                                <!-- text input -->
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label>Host</label>
+                                        <input type="text" class="form-control connector" id="txtHost" value="103.253.72.237">
+
+                                        <div class="sample">Sample</div>
+                                        <a class="sample" href="javascript:;" onclick="$('#txtHost').val('ais.myhr.co.th'); $('#txtPort').val('15675'); $('#chkSSL').prop('checked', false);">ws://49.0.64.28:15675/ws</a>
+                                        <a class="sample" href="javascript:;" onclick="$('#txtHost').val('ais.myhr.co.th'); $('#txtPort').val('15676'); $('#chkSSL').prop('checked', true);">wss://49.0.64.28:15676/ws</a>
+                                        <a class="sample" href="javascript:;" onclick="$('#txtHost').val('103.253.72.237'); $('#txtPort').val('8000'); $('#chkSSL').prop('checked', false);">ws://103.253.72.237:8000/ws</a>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Port</label>
+                                        <input type="text" class="form-control connector" id="txtPort" value="8000">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <input type="checkbox" class="connector" id="chkSSL" style="margin-right: 10px; width: 20px; height: 20px; ">
+                                        <label for="chkSSL">SSL</label>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                                                      
+                                    </div>
+                                </div>
+
+
+                                <!-- text input -->
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label>Client ID</label>
+                                        <input type="text" class="form-control connector" id="txtClientID">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Topic</label>
+                                        <input type="text" class="form-control connector" id="txtTopic" value="MD-GIS-UPDATE">
+                                    </div>
+                                </div>
+
+                                <!-- textarea -->
+                                <div class="form-group">
+                                    <label>Message</label>
+                                    <textarea class="form-control" rows="3" id="txtMessage"></textarea>
+                                </div>
+
+
+                                <button type="button" class="btn btn-warning pull-right" id="btnConnect">
+                                    <i class="fa fa-link"></i> Connect
+                                </button>
+
+                                <div class="btn-group pull-right" data="btn-group-connected">
+                                    <button type="button" class="btn btn-danger" id="btnDisconnect"><i class="fa fa-unlink"></i> Disconnect</button>
+                                    <button type="button" class="btn btn-success" id="btnSend"><i class="fa fa-paper-plane-o"></i> Send</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="box box-success">
+                            <div class="box-header with-border">
+                                <h3 class="box-title pull-left">
+                                    Retained Messages
+
+                                </h3>
+                                <button type="button" class="btn btn-sm btn-danger pull-right" onclick="clearMessages();">
+                                    <i class="fa fa-remove"></i> Clear
+                                </button>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+
+
+                                <div class="direct-chat-messages" style="overflow-x:hidden;">
+
+                                    <!-- Message. Default to the left
+                                    <div class="direct-chat-msg right">
+                                        <div class="direct-chat-info clearfix">
+                                            <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
+                                        </div>
+                                        <div class="direct-chat-text">
+                                            Message Message Message Message Message Message Message Message Message Message Message
+                                        </div>
+                                    </div>
+
+                                    <!-- Message to the right
+                                    <div class="direct-chat-msg left">
+                                        <div class="direct-chat-info clearfix">
+                                            <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
+                                        </div>
+                                        <div class="direct-chat-text">
+                                            Message Message Message Message Message Message Message Message Message Message Message
+                                        </div>
+                                    </div>-->
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            <!-- To the right -->
+            <div class="pull-right hidden-xs">
+                <img alt="TiT-Enterprise" title="TiT-Enterprise" height="30" style="margin-top: -5px;" src="https://www.tit-tech.co.th/img/TIT.png">
+            </div>
+            <!-- Default to the left -->
+            <strong>Copyright &copy; 2019 TIT-TECH.co.th</strong> All rights reserved.
+        </footer>
+
+
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery 3 -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Slimscroll -->
+    <script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="bower_components/fastclick/lib/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.min.js"></script>
+    <!-- iCheck -->
+    <script src="plugins/iCheck/icheck.min.js"></script>
+    <!-- Page Script -->
+    <!--DateFormat-->
+    <script src="js/date.format.js"></script>
+    <!--MQTT JS-->
+    <script src="js/paho-1.0.3/paho-mqtt-min.js"></script>
+
+    <script src="js/lib.js"></script>
+
+    <script>
+
+        var client;
+
+        function clearMessages() {
+            $('.direct-chat-messages').empty();
+        }
+
+        function startPage() {
+            clearMessages();
+            $("#txtClientID").val(crypto.randomUUID());
+            $(".connector").prop('disabled', false);
+            $('#txtMessage').prop('disabled', true);
+            $('#chkSSL').prop('checked', false);
+
+            $('#btnConnect').show();           
+
+            $('[data="btn-group-connected"]').hide();
+
+            $('#btnConnect').click(function () {
+                connectMQTT();
+            });
+            $('#btnSend').click(function () {
+                sendMessage($('#txtMessage').val());
+                $('#txtMessage').val('');
+                $('#txtMessage').focus();
+            });
+
+            $('#btnDisconnect').click(function () {
+                disConnectMQTT();
+            });
+
+        }
+
+        // Create a client instance
+
+    function connectMQTT() {
+
+        if ($("#txtHost").val() == '') {
+            alert("Insert host address");
+            return;
+        }
+
+        if (isNaN($("#txtPort").val())){
+            alert("Insert port with number");
+            return;
+        }
+
+        if ($("#txtClientID").val() == '') {
+            alert("Insert Client ID");
+            return;
+        }
+
+        if ($("#txtTopic").val() == '') {
+            alert("Insert topic to join");
+            return;
+        }
+
+        var host = $("#txtHost").val();
+        var port = parseInt($("#txtPort").val());
+
+        try {
+            
+            client = new Paho.MQTT.Client(host, port, "/ws", $('#txtClientID').val());
+
+            // set callback handlers
+            client.onConnectionLost = onConnectionLost;
+            client.onMessageArrived = onMessageArrived;
+
+            // connect the client
+            client.connect({
+                useSSL: $('#chkSSL').prop('checked'),
+                mqttVersion: 3,
+                onSuccess: onConnect,
+                onFailure: function (err) {
+                    alert(err.errorMessage);
+                },
+                timeout: 10,
+                keepAliveInterval: 50,
+                reconnect: true
+            });
+        } catch (e) {
+            alert(e);
+        }
+        
+    }
+
+    function disConnectMQTT() {
+        client.disconnect();
+    }
+
+    // called when the client connects
+    function onConnect() {
+        // Once a connection has been made, make a subscription and send a message.
+        client.subscribe($("#txtTopic").val());
+        sendMessage($('#txtClientID').val() + " connected");
+
+        // Update UI
+        $(".connector").prop('disabled', true);
+        $('#txtMessage').prop('disabled', false);
+        $('#btnConnect').hide();
+        $('[data="btn-group-connected"]').show();
+        $('#txtMessage').focus();
+    }
+
+    // called when the client loses its connection
+    function onConnectionLost(err) {
+        if (err.errorCode !== 0) {
+            $('.direct-chat-messages').prepend("<span class='danger'>ConnectionLost : " + err.errorMessage + '</span><br>');
+        }
+
+        // Update UI
+        $(".connector").prop('disabled', false);
+        $('#txtMessage').prop('disabled', true);
+        $('#btnConnect').show();
+        $('[data="btn-group-connected"]').hide();
+    }
+
+    // called when a message arrives
+    function onMessageArrived(message) {
+
+        if ($('.direct-chat-messages').html().length > 50000) {
+            $('.direct-chat-messages').empty();
+        }
+
+        var now = new Date();
+
+        var content = '<div class="direct-chat-msg right">';
+        content += '    <div class="direct-chat-info clearfix">';
+        content += '        <span class="direct-chat-timestamp pull-right">' + now.toLocaleString("en-US") + '</span>';
+        content += '    </div>';
+        content += '    <div class="direct-chat-text">' + message.payloadString.replaceAll('","', '" , "').replaceAll('":"','" : "').replaceAll('":','" : ') + '</div>';
+        content += '</div>';
+        $('.direct-chat-messages').prepend(content);            
+    }
+
+    function sendMessage(message) {
+        var pahoMsg = new Paho.MQTT.Message(message);
+        pahoMsg.destinationName = $("#txtTopic").val();
+        client.send(pahoMsg);
+    }
+
+    </script>
+</body>
+</html>

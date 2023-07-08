@@ -1,0 +1,812 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>
+    </SchemaVersion>
+    <ProjectGuid>{C1D8C16A-8CCB-4A04-AA1C-3B09A15A8B7B}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>MD_GIS</RootNamespace>
+    <AssemblyName>MD-GIS</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MyType>Custom</MyType>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort>56262</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="M2Mqtt.Net, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\M2Mqtt.4.3.0.0\lib\net45\M2Mqtt.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Collections.Specialized" />
+    <Import Include="System.Configuration" />
+    <Import Include="System.Text" />
+    <Import Include="System.Text.RegularExpressions" />
+    <Import Include="System.Web" />
+    <Import Include="System.Web.Caching" />
+    <Import Include="System.Web.SessionState" />
+    <Import Include="System.Web.Security" />
+    <Import Include="System.Web.Profile" />
+    <Import Include="System.Web.UI" />
+    <Import Include="System.Web.UI.WebControls" />
+    <Import Include="System.Web.UI.WebControls.WebParts" />
+    <Import Include="System.Web.UI.HtmlControls" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="build\js\BoxRefresh.js" />
+    <Content Include="build\js\BoxWidget.js" />
+    <Content Include="build\js\ControlSidebar.js" />
+    <Content Include="build\js\DirectChat.js" />
+    <Content Include="build\js\Layout.js" />
+    <Content Include="build\js\PushMenu.js" />
+    <Content Include="build\js\TodoList.js" />
+    <Content Include="build\js\Tree.js" />
+    <Content Include="dist\css\AdminLTE.css" />
+    <Content Include="dist\css\AdminLTE.min.css" />
+    <Content Include="dist\css\alt\AdminLTE-bootstrap-social.css" />
+    <Content Include="dist\css\alt\AdminLTE-bootstrap-social.min.css" />
+    <Content Include="dist\css\alt\AdminLTE-fullcalendar.css" />
+    <Content Include="dist\css\alt\AdminLTE-fullcalendar.min.css" />
+    <Content Include="dist\css\alt\AdminLTE-select2.css" />
+    <Content Include="dist\css\alt\AdminLTE-select2.min.css" />
+    <Content Include="dist\css\alt\AdminLTE-without-plugins.css" />
+    <Content Include="dist\css\alt\AdminLTE-without-plugins.min.css" />
+    <Content Include="dist\css\skins\skin-black-light.css" />
+    <Content Include="dist\css\skins\skin-black-light.min.css" />
+    <Content Include="dist\css\skins\skin-black.css" />
+    <Content Include="dist\css\skins\skin-black.min.css" />
+    <Content Include="dist\css\skins\skin-blue-light.css" />
+    <Content Include="dist\css\skins\skin-blue-light.min.css" />
+    <Content Include="dist\css\skins\skin-blue.css" />
+    <Content Include="dist\css\skins\skin-blue.min.css" />
+    <Content Include="dist\css\skins\skin-green-light.css" />
+    <Content Include="dist\css\skins\skin-green-light.min.css" />
+    <Content Include="dist\css\skins\skin-green.css" />
+    <Content Include="dist\css\skins\skin-green.min.css" />
+    <Content Include="dist\css\skins\skin-purple-light.css" />
+    <Content Include="dist\css\skins\skin-purple-light.min.css" />
+    <Content Include="dist\css\skins\skin-purple.css" />
+    <Content Include="dist\css\skins\skin-purple.min.css" />
+    <Content Include="dist\css\skins\skin-red-light.css" />
+    <Content Include="dist\css\skins\skin-red-light.min.css" />
+    <Content Include="dist\css\skins\skin-red.css" />
+    <Content Include="dist\css\skins\skin-red.min.css" />
+    <Content Include="dist\css\skins\skin-yellow-light.css" />
+    <Content Include="dist\css\skins\skin-yellow-light.min.css" />
+    <Content Include="dist\css\skins\skin-yellow.css" />
+    <Content Include="dist\css\skins\skin-yellow.min.css" />
+    <Content Include="dist\css\skins\_all-skins.css" />
+    <Content Include="dist\css\skins\_all-skins.min.css" />
+    <Content Include="dist\img\avatar.png" />
+    <Content Include="dist\img\avatar04.png" />
+    <Content Include="dist\img\avatar2.png" />
+    <Content Include="dist\img\avatar3.png" />
+    <Content Include="dist\img\avatar5.png" />
+    <Content Include="dist\img\credit\american-express.png" />
+    <Content Include="dist\img\credit\cirrus.png" />
+    <Content Include="dist\img\credit\mastercard.png" />
+    <Content Include="dist\img\credit\mestro.png" />
+    <Content Include="dist\img\credit\paypal.png" />
+    <Content Include="dist\img\credit\paypal2.png" />
+    <Content Include="dist\img\credit\visa.png" />
+    <Content Include="dist\img\default-50x50.gif" />
+    <Content Include="dist\img\icons.png" />
+    <Content Include="dist\img\photo1.png" />
+    <Content Include="dist\img\photo2.png" />
+    <Content Include="dist\img\photo3.jpg" />
+    <Content Include="dist\img\photo4.jpg" />
+    <Content Include="dist\img\user1-128x128.jpg" />
+    <Content Include="dist\img\user2-160x160.jpg" />
+    <Content Include="dist\img\user3-128x128.jpg" />
+    <Content Include="dist\img\user4-128x128.jpg" />
+    <Content Include="dist\img\user5-128x128.jpg" />
+    <Content Include="dist\img\user6-128x128.jpg" />
+    <Content Include="dist\img\user7-128x128.jpg" />
+    <Content Include="dist\img\user8-128x128.jpg" />
+    <Content Include="dist\js\adminlte.js" />
+    <Content Include="dist\js\adminlte.min.js" />
+    <Content Include="dist\js\demo.js" />
+    <Content Include="dist\js\pages\dashboard.js" />
+    <Content Include="dist\js\pages\dashboard2.js" />
+    <Content Include="images\info.png" />
+    <Content Include="images\myHRLogo.png" />
+    <Content Include="images\ShipIcon\PNG\Cargo_C_0.png" />
+    <Content Include="images\ShipIcon\PNG\Cargo_C_120.png" />
+    <Content Include="images\ShipIcon\PNG\Cargo_C_240.png" />
+    <Content Include="images\ShipIcon\PNG\Cargo_C_360.png" />
+    <Content Include="images\ShipIcon\PNG\Cargo_S_0.png" />
+    <Content Include="images\ShipIcon\PNG\Cargo_S_120.png" />
+    <Content Include="images\ShipIcon\PNG\Cargo_S_240.png" />
+    <Content Include="images\ShipIcon\PNG\Cargo_S_360.png" />
+    <Content Include="images\ShipIcon\PNG\Fishing_C_0.png" />
+    <Content Include="images\ShipIcon\PNG\Fishing_C_120.png" />
+    <Content Include="images\ShipIcon\PNG\Fishing_C_240.png" />
+    <Content Include="images\ShipIcon\PNG\Fishing_C_360.png" />
+    <Content Include="images\ShipIcon\PNG\Fishing_S_0.png" />
+    <Content Include="images\ShipIcon\PNG\Fishing_S_120.png" />
+    <Content Include="images\ShipIcon\PNG\Fishing_S_240.png" />
+    <Content Include="images\ShipIcon\PNG\Fishing_S_360.png" />
+    <Content Include="images\ShipIcon\PNG\HighSpeed_C_0.png" />
+    <Content Include="images\ShipIcon\PNG\HighSpeed_C_120.png" />
+    <Content Include="images\ShipIcon\PNG\HighSpeed_C_240.png" />
+    <Content Include="images\ShipIcon\PNG\HighSpeed_C_360.png" />
+    <Content Include="images\ShipIcon\PNG\HighSpeed_S_0.png" />
+    <Content Include="images\ShipIcon\PNG\HighSpeed_S_120.png" />
+    <Content Include="images\ShipIcon\PNG\HighSpeed_S_240.png" />
+    <Content Include="images\ShipIcon\PNG\HighSpeed_S_360.png" />
+    <Content Include="images\ShipIcon\PNG\Navigation_S_240.png" />
+    <Content Include="images\ShipIcon\PNG\Passenger_C_0.png" />
+    <Content Include="images\ShipIcon\PNG\Passenger_C_120.png" />
+    <Content Include="images\ShipIcon\PNG\Passenger_C_240.png" />
+    <Content Include="images\ShipIcon\PNG\Passenger_C_360.png" />
+    <Content Include="images\ShipIcon\PNG\Passenger_S_0.png" />
+    <Content Include="images\ShipIcon\PNG\Passenger_S_120.png" />
+    <Content Include="images\ShipIcon\PNG\Passenger_S_240.png" />
+    <Content Include="images\ShipIcon\PNG\Passenger_S_360.png" />
+    <Content Include="images\ShipIcon\PNG\Pleasure_C_0.png" />
+    <Content Include="images\ShipIcon\PNG\Pleasure_C_120.png" />
+    <Content Include="images\ShipIcon\PNG\Pleasure_C_240.png" />
+    <Content Include="images\ShipIcon\PNG\Pleasure_C_360.png" />
+    <Content Include="images\ShipIcon\PNG\Pleasure_S_0.png" />
+    <Content Include="images\ShipIcon\PNG\Pleasure_S_120.png" />
+    <Content Include="images\ShipIcon\PNG\Pleasure_S_240.png" />
+    <Content Include="images\ShipIcon\PNG\Pleasure_S_360.png" />
+    <Content Include="images\ShipIcon\PNG\ShipIconSet.png" />
+    <Content Include="images\ShipIcon\PNG\Tanker_C_0.png" />
+    <Content Include="images\ShipIcon\PNG\Tanker_C_120.png" />
+    <Content Include="images\ShipIcon\PNG\Tanker_C_240.png" />
+    <Content Include="images\ShipIcon\PNG\Tanker_C_360.png" />
+    <Content Include="images\ShipIcon\PNG\Tanker_S_0.png" />
+    <Content Include="images\ShipIcon\PNG\Tanker_S_120.png" />
+    <Content Include="images\ShipIcon\PNG\Tanker_S_240.png" />
+    <Content Include="images\ShipIcon\PNG\Tanker_S_360.png" />
+    <Content Include="images\ShipIcon\PNG\TugAndSpecial_C_0.png" />
+    <Content Include="images\ShipIcon\PNG\TugAndSpecial_C_120.png" />
+    <Content Include="images\ShipIcon\PNG\TugAndSpecial_C_240.png" />
+    <Content Include="images\ShipIcon\PNG\TugAndSpecial_C_360.png" />
+    <Content Include="images\ShipIcon\PNG\TugAndSpecial_S_0.png" />
+    <Content Include="images\ShipIcon\PNG\TugAndSpecial_S_120.png" />
+    <Content Include="images\ShipIcon\PNG\TugAndSpecial_S_240.png" />
+    <Content Include="images\ShipIcon\PNG\TugAndSpecial_S_360.png" />
+    <Content Include="images\ShipIcon\PNG\Unspecific_C_0.png" />
+    <Content Include="images\ShipIcon\PNG\Unspecific_C_120.png" />
+    <Content Include="images\ShipIcon\PNG\Unspecific_C_240.png" />
+    <Content Include="images\ShipIcon\PNG\Unspecific_C_360.png" />
+    <Content Include="images\ShipIcon\PNG\Unspecific_S_0.png" />
+    <Content Include="images\ShipIcon\PNG\Unspecific_S_120.png" />
+    <Content Include="images\ShipIcon\PNG\Unspecific_S_240.png" />
+    <Content Include="images\ShipIcon\PNG\Unspecific_S_360.png" />
+    <Content Include="images\warning.gif" />
+    <Content Include="images\Watchdog-Sleeping.gif" />
+    <Content Include="images\Watchdog-Working.gif" />
+    <Content Include="images\wifi.ico" />
+    <Content Include="Index.html" />
+    <Content Include="InfoWindowMini.html" />
+    <Content Include="js\checkbox.js" />
+    <Content Include="js\date.format.js" />
+    <Content Include="js\history.js" />
+    <Content Include="js\html5shiv.min.js" />
+    <Content Include="js\jquery.cookie.min.js" />
+    <Content Include="js\jquery.ns-autogrow.min.js" />
+    <Content Include="js\lib.js" />
+    <Content Include="js\map.js" />
+    <Content Include="js\paho-1.0.3\about.html" />
+    <Content Include="js\paho-1.0.3\paho-mqtt-min.js" />
+    <Content Include="js\paho-1.0.3\paho-mqtt.js" />
+    <Content Include="js\propertyfilter.js" />
+    <Content Include="js\realtime.js" />
+    <Content Include="js\respond.min.js" />
+    <Content Include="js\scheduleAndPeriod.js" />
+    <Content Include="js\ship.js" />
+    <Content Include="js\txtClientControl.js" />
+    <Content Include="js\watchdog.js" />
+    <Content Include="js\WatchdogMap.js" />
+    <Content Include="js\zone.js" />
+    <Content Include="MQTT.html" />
+    <Content Include="Picture\Flag\AD.png" />
+    <Content Include="Picture\Flag\AE.png" />
+    <Content Include="Picture\Flag\AF.png" />
+    <Content Include="Picture\Flag\AG.png" />
+    <Content Include="Picture\Flag\AI.png" />
+    <Content Include="Picture\Flag\AL.png" />
+    <Content Include="Picture\Flag\AM.png" />
+    <Content Include="Picture\Flag\AN.png" />
+    <Content Include="Picture\Flag\AO.png" />
+    <Content Include="Picture\Flag\AQ.png" />
+    <Content Include="Picture\Flag\AR.png" />
+    <Content Include="Picture\Flag\AS.png" />
+    <Content Include="Picture\Flag\AT.png" />
+    <Content Include="Picture\Flag\AU.png" />
+    <Content Include="Picture\Flag\AW.png" />
+    <Content Include="Picture\Flag\AX.png" />
+    <Content Include="Picture\Flag\AZ.png" />
+    <Content Include="Picture\Flag\BA.png" />
+    <Content Include="Picture\Flag\BB.png" />
+    <Content Include="Picture\Flag\BD.png" />
+    <Content Include="Picture\Flag\BE.png" />
+    <Content Include="Picture\Flag\BF.png" />
+    <Content Include="Picture\Flag\BG.png" />
+    <Content Include="Picture\Flag\BH.png" />
+    <Content Include="Picture\Flag\BI.png" />
+    <Content Include="Picture\Flag\BJ.png" />
+    <Content Include="Picture\Flag\BL.png" />
+    <Content Include="Picture\Flag\BM.png" />
+    <Content Include="Picture\Flag\BN.png" />
+    <Content Include="Picture\Flag\BO.png" />
+    <Content Include="Picture\Flag\BQ.png" />
+    <Content Include="Picture\Flag\BR.png" />
+    <Content Include="Picture\Flag\BS.png" />
+    <Content Include="Picture\Flag\BT.png" />
+    <Content Include="Picture\Flag\BV.png" />
+    <Content Include="Picture\Flag\BW.png" />
+    <Content Include="Picture\Flag\BY.png" />
+    <Content Include="Picture\Flag\BZ.png" />
+    <Content Include="Picture\Flag\CA.png" />
+    <Content Include="Picture\Flag\CC.png" />
+    <Content Include="Picture\Flag\CD.png" />
+    <Content Include="Picture\Flag\CF.png" />
+    <Content Include="Picture\Flag\CG.png" />
+    <Content Include="Picture\Flag\CH.png" />
+    <Content Include="Picture\Flag\CI.png" />
+    <Content Include="Picture\Flag\CK.png" />
+    <Content Include="Picture\Flag\CL.png" />
+    <Content Include="Picture\Flag\CM.png" />
+    <Content Include="Picture\Flag\CN.png" />
+    <Content Include="Picture\Flag\CO.png" />
+    <Content Include="Picture\Flag\CR.png" />
+    <Content Include="Picture\Flag\CS.png" />
+    <Content Include="Picture\Flag\CU.png" />
+    <Content Include="Picture\Flag\CV.png" />
+    <Content Include="Picture\Flag\CW.png" />
+    <Content Include="Picture\Flag\CX.png" />
+    <Content Include="Picture\Flag\CY.png" />
+    <Content Include="Picture\Flag\CZ.png" />
+    <Content Include="Picture\Flag\DD.png" />
+    <Content Include="Picture\Flag\DE.png" />
+    <Content Include="Picture\Flag\Default.png" />
+    <Content Include="Picture\Flag\DJ.png" />
+    <Content Include="Picture\Flag\DK.png" />
+    <Content Include="Picture\Flag\DM.png" />
+    <Content Include="Picture\Flag\DO.png" />
+    <Content Include="Picture\Flag\DZ.png" />
+    <Content Include="Picture\Flag\EC.png" />
+    <Content Include="Picture\Flag\EE.png" />
+    <Content Include="Picture\Flag\EG.png" />
+    <Content Include="Picture\Flag\EH.png" />
+    <Content Include="Picture\Flag\ER.png" />
+    <Content Include="Picture\Flag\ES.png" />
+    <Content Include="Picture\Flag\ET.png" />
+    <Content Include="Picture\Flag\FI.png" />
+    <Content Include="Picture\Flag\FJ.png" />
+    <Content Include="Picture\Flag\FK.png" />
+    <Content Include="Picture\Flag\FM.png" />
+    <Content Include="Picture\Flag\FO.png" />
+    <Content Include="Picture\Flag\FR.png" />
+    <Content Include="Picture\Flag\GA.png" />
+    <Content Include="Picture\Flag\GB.png" />
+    <Content Include="Picture\Flag\GD.png" />
+    <Content Include="Picture\Flag\GE.png" />
+    <Content Include="Picture\Flag\GF.png" />
+    <Content Include="Picture\Flag\GG.png" />
+    <Content Include="Picture\Flag\GH.png" />
+    <Content Include="Picture\Flag\GI.png" />
+    <Content Include="Picture\Flag\GL.png" />
+    <Content Include="Picture\Flag\GM.png" />
+    <Content Include="Picture\Flag\GN.png" />
+    <Content Include="Picture\Flag\GP.png" />
+    <Content Include="Picture\Flag\GQ.png" />
+    <Content Include="Picture\Flag\GR.png" />
+    <Content Include="Picture\Flag\GS.png" />
+    <Content Include="Picture\Flag\GT.png" />
+    <Content Include="Picture\Flag\GU.png" />
+    <Content Include="Picture\Flag\GW.png" />
+    <Content Include="Picture\Flag\GY.png" />
+    <Content Include="Picture\Flag\HK.png" />
+    <Content Include="Picture\Flag\HM.png" />
+    <Content Include="Picture\Flag\HN.png" />
+    <Content Include="Picture\Flag\HR.png" />
+    <Content Include="Picture\Flag\HT.png" />
+    <Content Include="Picture\Flag\HU.png" />
+    <Content Include="Picture\Flag\ID.png" />
+    <Content Include="Picture\Flag\IE.png" />
+    <Content Include="Picture\Flag\IL.png" />
+    <Content Include="Picture\Flag\IM.png" />
+    <Content Include="Picture\Flag\IN.png" />
+    <Content Include="Picture\Flag\IO.png" />
+    <Content Include="Picture\Flag\IQ.png" />
+    <Content Include="Picture\Flag\IR.png" />
+    <Content Include="Picture\Flag\IS.png" />
+    <Content Include="Picture\Flag\IT.png" />
+    <Content Include="Picture\Flag\JE.png" />
+    <Content Include="Picture\Flag\JM.png" />
+    <Content Include="Picture\Flag\JO.png" />
+    <Content Include="Picture\Flag\JP.png" />
+    <Content Include="Picture\Flag\KE.png" />
+    <Content Include="Picture\Flag\KG.png" />
+    <Content Include="Picture\Flag\KH.png" />
+    <Content Include="Picture\Flag\KI.png" />
+    <Content Include="Picture\Flag\KM.png" />
+    <Content Include="Picture\Flag\KN.png" />
+    <Content Include="Picture\Flag\KP.png" />
+    <Content Include="Picture\Flag\KR.png" />
+    <Content Include="Picture\Flag\KW.png" />
+    <Content Include="Picture\Flag\KY.png" />
+    <Content Include="Picture\Flag\KZ.png" />
+    <Content Include="Picture\Flag\LA.png" />
+    <Content Include="Picture\Flag\LB.png" />
+    <Content Include="Picture\Flag\LC.png" />
+    <Content Include="Picture\Flag\LI.png" />
+    <Content Include="Picture\Flag\LK.png" />
+    <Content Include="Picture\Flag\LR.png" />
+    <Content Include="Picture\Flag\LS.png" />
+    <Content Include="Picture\Flag\LT.png" />
+    <Content Include="Picture\Flag\LU.png" />
+    <Content Include="Picture\Flag\LV.png" />
+    <Content Include="Picture\Flag\LY.png" />
+    <Content Include="Picture\Flag\MA.png" />
+    <Content Include="Picture\Flag\MC.png" />
+    <Content Include="Picture\Flag\MD.png" />
+    <Content Include="Picture\Flag\ME.png" />
+    <Content Include="Picture\Flag\MF.png" />
+    <Content Include="Picture\Flag\MG.png" />
+    <Content Include="Picture\Flag\MH.png" />
+    <Content Include="Picture\Flag\MK.png" />
+    <Content Include="Picture\Flag\ML.png" />
+    <Content Include="Picture\Flag\MM.png" />
+    <Content Include="Picture\Flag\MN.png" />
+    <Content Include="Picture\Flag\MO.png" />
+    <Content Include="Picture\Flag\MP.png" />
+    <Content Include="Picture\Flag\MQ.png" />
+    <Content Include="Picture\Flag\MR.png" />
+    <Content Include="Picture\Flag\MS.png" />
+    <Content Include="Picture\Flag\MT.png" />
+    <Content Include="Picture\Flag\MU.png" />
+    <Content Include="Picture\Flag\MV.png" />
+    <Content Include="Picture\Flag\MW.png" />
+    <Content Include="Picture\Flag\MX.png" />
+    <Content Include="Picture\Flag\MY.png" />
+    <Content Include="Picture\Flag\MZ.png" />
+    <Content Include="Picture\Flag\NA.png" />
+    <Content Include="Picture\Flag\NC.png" />
+    <Content Include="Picture\Flag\NE.png" />
+    <Content Include="Picture\Flag\NF.png" />
+    <Content Include="Picture\Flag\NG.png" />
+    <Content Include="Picture\Flag\NI.png" />
+    <Content Include="Picture\Flag\NL.png" />
+    <Content Include="Picture\Flag\NO.png" />
+    <Content Include="Picture\Flag\NP.png" />
+    <Content Include="Picture\Flag\NR.png" />
+    <Content Include="Picture\Flag\NU.png" />
+    <Content Include="Picture\Flag\NZ.png" />
+    <Content Include="Picture\Flag\OM.png" />
+    <Content Include="Picture\Flag\PA.png" />
+    <Content Include="Picture\Flag\PE.png" />
+    <Content Include="Picture\Flag\PF.png" />
+    <Content Include="Picture\Flag\PG.png" />
+    <Content Include="Picture\Flag\PH.png" />
+    <Content Include="Picture\Flag\PK.png" />
+    <Content Include="Picture\Flag\PL.png" />
+    <Content Include="Picture\Flag\PM.png" />
+    <Content Include="Picture\Flag\PN.png" />
+    <Content Include="Picture\Flag\PR.png" />
+    <Content Include="Picture\Flag\PS.png" />
+    <Content Include="Picture\Flag\PT.png" />
+    <Content Include="Picture\Flag\PW.png" />
+    <Content Include="Picture\Flag\PY.png" />
+    <Content Include="Picture\Flag\QA.png" />
+    <Content Include="Picture\Flag\RE.png" />
+    <Content Include="Picture\Flag\RO.png" />
+    <Content Include="Picture\Flag\RS.png" />
+    <Content Include="Picture\Flag\RU.png" />
+    <Content Include="Picture\Flag\RW.png" />
+    <Content Include="Picture\Flag\SA.png" />
+    <Content Include="Picture\Flag\SB.png" />
+    <Content Include="Picture\Flag\SC.png" />
+    <Content Include="Picture\Flag\SD.png" />
+    <Content Include="Picture\Flag\SE.png" />
+    <Content Include="Picture\Flag\SG.png" />
+    <Content Include="Picture\Flag\SH.png" />
+    <Content Include="Picture\Flag\SI.png" />
+    <Content Include="Picture\Flag\SJ.png" />
+    <Content Include="Picture\Flag\SK.png" />
+    <Content Include="Picture\Flag\SL.png" />
+    <Content Include="Picture\Flag\SM.png" />
+    <Content Include="Picture\Flag\SN.png" />
+    <Content Include="Picture\Flag\SO.png" />
+    <Content Include="Picture\Flag\SR.png" />
+    <Content Include="Picture\Flag\SS.png" />
+    <Content Include="Picture\Flag\ST.png" />
+    <Content Include="Picture\Flag\SV.png" />
+    <Content Include="Picture\Flag\SX.png" />
+    <Content Include="Picture\Flag\SY.png" />
+    <Content Include="Picture\Flag\SZ.png" />
+    <Content Include="Picture\Flag\TC.png" />
+    <Content Include="Picture\Flag\TD.png" />
+    <Content Include="Picture\Flag\TF.png" />
+    <Content Include="Picture\Flag\TG.png" />
+    <Content Include="Picture\Flag\TH.png" />
+    <Content Include="Picture\Flag\TJ.png" />
+    <Content Include="Picture\Flag\TK.png" />
+    <Content Include="Picture\Flag\TL.png" />
+    <Content Include="Picture\Flag\TM.png" />
+    <Content Include="Picture\Flag\TN.png" />
+    <Content Include="Picture\Flag\TO.png" />
+    <Content Include="Picture\Flag\TR.png" />
+    <Content Include="Picture\Flag\TT.png" />
+    <Content Include="Picture\Flag\TV.png" />
+    <Content Include="Picture\Flag\TW.png" />
+    <Content Include="Picture\Flag\TZ.png" />
+    <Content Include="Picture\Flag\UA.png" />
+    <Content Include="Picture\Flag\UG.png" />
+    <Content Include="Picture\Flag\UM.png" />
+    <Content Include="Picture\Flag\unknown.png" />
+    <Content Include="Picture\Flag\US.png" />
+    <Content Include="Picture\Flag\UY.png" />
+    <Content Include="Picture\Flag\UZ.png" />
+    <Content Include="Picture\Flag\VA.png" />
+    <Content Include="Picture\Flag\VC.png" />
+    <Content Include="Picture\Flag\VE.png" />
+    <Content Include="Picture\Flag\VG.png" />
+    <Content Include="Picture\Flag\VI.png" />
+    <Content Include="Picture\Flag\VN.png" />
+    <Content Include="Picture\Flag\VU.png" />
+    <Content Include="Picture\Flag\WF.png" />
+    <Content Include="Picture\Flag\WS.png" />
+    <Content Include="Picture\Flag\XA.png" />
+    <Content Include="Picture\Flag\XB.png" />
+    <Content Include="Picture\Flag\XC.png" />
+    <Content Include="Picture\Flag\XD.png" />
+    <Content Include="Picture\Flag\XE.png" />
+    <Content Include="Picture\Flag\XF.png" />
+    <Content Include="Picture\Flag\XG.png" />
+    <Content Include="Picture\Flag\XH.png" />
+    <Content Include="Picture\Flag\XI.png" />
+    <Content Include="Picture\Flag\YE.png" />
+    <Content Include="Picture\Flag\YT.png" />
+    <Content Include="Picture\Flag\YU.png" />
+    <Content Include="Picture\Flag\ZA.png" />
+    <Content Include="Picture\Flag\ZM.png" />
+    <Content Include="Picture\Flag\ZW.png" />
+    <Content Include="Picture\Flag\ZZ.png" />
+    <Content Include="ShipIcon.aspx" />
+    <Content Include="ShipInfo.aspx" />
+    <Content Include="ShipPicture.aspx" />
+    <Content Include="ShipSetting.html" />
+    <Content Include="WatchDog.html" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="API.ashx.vb">
+      <DependentUpon>API.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\Converter.vb" />
+    <Compile Include="App_Code\MDBL.vb" />
+    <Compile Include="App_Code\ModuleGlobal.vb" />
+    <Compile Include="App_Code\WatchDog.vb" />
+    <Compile Include="App_Code\Zone.vb" />
+    <Compile Include="App_Code\PropertyFilter.vb" />
+    <Compile Include="App_Code\ConfigChanged.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\MyExtensions\MyWebExtension.vb">
+      <VBMyExtensionTemplateID>Microsoft.VisualBasic.Web.MyExtension</VBMyExtensionTemplateID>
+      <VBMyExtensionTemplateVersion>1.0.0.0</VBMyExtensionTemplateVersion>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ShipIcon.aspx.designer.vb">
+      <DependentUpon>ShipIcon.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShipIcon.aspx.vb">
+      <DependentUpon>ShipIcon.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ShipInfo.aspx.designer.vb">
+      <DependentUpon>ShipInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShipInfo.aspx.vb">
+      <DependentUpon>ShipInfo.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="App_Code\Ship.vb" />
+    <Compile Include="ShipPicture.aspx.designer.vb">
+      <DependentUpon>ShipPicture.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShipPicture.aspx.vb">
+      <DependentUpon>ShipPicture.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="build\bootstrap-less\.csscomb.json" />
+    <Content Include="build\bootstrap-less\.csslintrc" />
+    <Content Include="build\bootstrap-less\alerts.less" />
+    <Content Include="build\bootstrap-less\badges.less" />
+    <Content Include="build\bootstrap-less\bootstrap.less" />
+    <Content Include="build\bootstrap-less\breadcrumbs.less" />
+    <Content Include="build\bootstrap-less\button-groups.less" />
+    <Content Include="build\bootstrap-less\buttons.less" />
+    <Content Include="build\bootstrap-less\carousel.less" />
+    <Content Include="build\bootstrap-less\close.less" />
+    <Content Include="build\bootstrap-less\code.less" />
+    <Content Include="build\bootstrap-less\component-animations.less" />
+    <Content Include="build\bootstrap-less\dropdowns.less" />
+    <Content Include="build\bootstrap-less\forms.less" />
+    <Content Include="build\bootstrap-less\glyphicons.less" />
+    <Content Include="build\bootstrap-less\grid.less" />
+    <Content Include="build\bootstrap-less\input-groups.less" />
+    <Content Include="build\bootstrap-less\jumbotron.less" />
+    <Content Include="build\bootstrap-less\labels.less" />
+    <Content Include="build\bootstrap-less\list-group.less" />
+    <Content Include="build\bootstrap-less\media.less" />
+    <Content Include="build\bootstrap-less\mixins.less" />
+    <Content Include="build\bootstrap-less\mixins\alerts.less" />
+    <Content Include="build\bootstrap-less\mixins\background-variant.less" />
+    <Content Include="build\bootstrap-less\mixins\border-radius.less" />
+    <Content Include="build\bootstrap-less\mixins\buttons.less" />
+    <Content Include="build\bootstrap-less\mixins\center-block.less" />
+    <Content Include="build\bootstrap-less\mixins\clearfix.less" />
+    <Content Include="build\bootstrap-less\mixins\forms.less" />
+    <Content Include="build\bootstrap-less\mixins\gradients.less" />
+    <Content Include="build\bootstrap-less\mixins\grid-framework.less" />
+    <Content Include="build\bootstrap-less\mixins\grid.less" />
+    <Content Include="build\bootstrap-less\mixins\hide-text.less" />
+    <Content Include="build\bootstrap-less\mixins\image.less" />
+    <Content Include="build\bootstrap-less\mixins\labels.less" />
+    <Content Include="build\bootstrap-less\mixins\list-group.less" />
+    <Content Include="build\bootstrap-less\mixins\nav-divider.less" />
+    <Content Include="build\bootstrap-less\mixins\nav-vertical-align.less" />
+    <Content Include="build\bootstrap-less\mixins\opacity.less" />
+    <Content Include="build\bootstrap-less\mixins\pagination.less" />
+    <Content Include="build\bootstrap-less\mixins\panels.less" />
+    <Content Include="build\bootstrap-less\mixins\progress-bar.less" />
+    <Content Include="build\bootstrap-less\mixins\reset-filter.less" />
+    <Content Include="build\bootstrap-less\mixins\reset-text.less" />
+    <Content Include="build\bootstrap-less\mixins\resize.less" />
+    <Content Include="build\bootstrap-less\mixins\responsive-visibility.less" />
+    <Content Include="build\bootstrap-less\mixins\size.less" />
+    <Content Include="build\bootstrap-less\mixins\tab-focus.less" />
+    <Content Include="build\bootstrap-less\mixins\table-row.less" />
+    <Content Include="build\bootstrap-less\mixins\text-emphasis.less" />
+    <Content Include="build\bootstrap-less\mixins\text-overflow.less" />
+    <Content Include="build\bootstrap-less\mixins\vendor-prefixes.less" />
+    <Content Include="build\bootstrap-less\modals.less" />
+    <Content Include="build\bootstrap-less\navbar.less" />
+    <Content Include="build\bootstrap-less\navs.less" />
+    <Content Include="build\bootstrap-less\normalize.less" />
+    <Content Include="build\bootstrap-less\pager.less" />
+    <Content Include="build\bootstrap-less\pagination.less" />
+    <Content Include="build\bootstrap-less\panels.less" />
+    <Content Include="build\bootstrap-less\popovers.less" />
+    <Content Include="build\bootstrap-less\print.less" />
+    <Content Include="build\bootstrap-less\progress-bars.less" />
+    <Content Include="build\bootstrap-less\responsive-embed.less" />
+    <Content Include="build\bootstrap-less\responsive-utilities.less" />
+    <Content Include="build\bootstrap-less\scaffolding.less" />
+    <Content Include="build\bootstrap-less\tables.less" />
+    <Content Include="build\bootstrap-less\theme.less" />
+    <Content Include="build\bootstrap-less\thumbnails.less" />
+    <Content Include="build\bootstrap-less\tooltip.less" />
+    <Content Include="build\bootstrap-less\type.less" />
+    <Content Include="build\bootstrap-less\utilities.less" />
+    <Content Include="build\bootstrap-less\variables.less" />
+    <Content Include="build\bootstrap-less\wells.less" />
+    <Content Include="build\grunt\.jshintrc" />
+    <Content Include="build\js\.jscsrc" />
+    <Content Include="build\js\.jshintrc" />
+    <Content Include="build\less\.csslintrc" />
+    <Content Include="build\less\404_500_errors.less" />
+    <Content Include="build\less\AdminLTE-without-plugins.less" />
+    <Content Include="build\less\AdminLTE.less" />
+    <Content Include="build\less\alerts.less" />
+    <Content Include="build\less\bootstrap-social.less" />
+    <Content Include="build\less\boxes.less" />
+    <Content Include="build\less\buttons.less" />
+    <Content Include="build\less\callout.less" />
+    <Content Include="build\less\carousel.less" />
+    <Content Include="build\less\control-sidebar.less" />
+    <Content Include="build\less\core.less" />
+    <Content Include="build\less\datepicker.less" />
+    <Content Include="build\less\direct-chat.less" />
+    <Content Include="build\less\dropdown.less" />
+    <Content Include="build\less\forms.less" />
+    <Content Include="build\less\fullcalendar.less" />
+    <Content Include="build\less\header.less" />
+    <Content Include="build\less\info-box.less" />
+    <Content Include="build\less\invoice.less" />
+    <Content Include="build\less\labels.less" />
+    <Content Include="build\less\lockscreen.less" />
+    <Content Include="build\less\login_and_register.less" />
+    <Content Include="build\less\mailbox.less" />
+    <Content Include="build\less\miscellaneous.less" />
+    <Content Include="build\less\mixins.less" />
+    <Content Include="build\less\modal.less" />
+    <Content Include="build\less\navs.less" />
+    <Content Include="build\less\plugins.less" />
+    <Content Include="build\less\print.less" />
+    <Content Include="build\less\products.less" />
+    <Content Include="build\less\profile.less" />
+    <Content Include="build\less\progress-bars.less" />
+    <Content Include="build\less\select2.less" />
+    <Content Include="build\less\sidebar-mini.less" />
+    <Content Include="build\less\sidebar.less" />
+    <Content Include="build\less\skins\skin-black-light.less" />
+    <Content Include="build\less\skins\skin-black.less" />
+    <Content Include="build\less\skins\skin-blue-light.less" />
+    <Content Include="build\less\skins\skin-blue.less" />
+    <Content Include="build\less\skins\skin-green-light.less" />
+    <Content Include="build\less\skins\skin-green.less" />
+    <Content Include="build\less\skins\skin-purple-light.less" />
+    <Content Include="build\less\skins\skin-purple.less" />
+    <Content Include="build\less\skins\skin-red-light.less" />
+    <Content Include="build\less\skins\skin-red.less" />
+    <Content Include="build\less\skins\skin-yellow-light.less" />
+    <Content Include="build\less\skins\skin-yellow.less" />
+    <Content Include="build\less\skins\_all-skins.less" />
+    <Content Include="build\less\small-box.less" />
+    <Content Include="build\less\social-widgets.less" />
+    <Content Include="build\less\table.less" />
+    <Content Include="build\less\timeline.less" />
+    <Content Include="build\less\treeview.less" />
+    <Content Include="build\less\users-list.less" />
+    <Content Include="build\less\variables.less" />
+    <Content Include="build\scss\_variables.scss" />
+    <Content Include="dist\css\adminlte.css.map" />
+    <Content Include="dist\css\adminlte.min.css.map" />
+    <Content Include="API.ashx" />
+    <Content Include="js\paho-1.0.3\CONTRIBUTING.md" />
+    <Content Include="js\paho-1.0.3\edl-v10" />
+    <Content Include="js\paho-1.0.3\epl-v10" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\PublishProfiles\TempPublish.pubxml" />
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="packages.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Certificate\" />
+    <Folder Include="Data\" />
+    <Folder Include="Picture\Ship\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>56262</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:56262/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
